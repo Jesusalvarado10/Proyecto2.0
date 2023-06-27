@@ -60,24 +60,6 @@ public class HashTable<T> {
         Lista<User> list = table[index];
        list.addLast((User)u);
         }
-//        for (User entry : table[index]) {
-//            if (entry.getKey() == key) {
-//                // Si la clave ya existe, actualizamos el valor
-//                entry.setValue(value);
-//                return;
-//            }
-//
-//        for (Entry entry : list) {
-//            if (entry.getKey() == key) {
-//                // Si la clave ya existe, actualizamos el valor
-//                entry.setValue(value);
-//                return;
-//            }
-//        }
-//
-//        // Si la clave no existe, la insertamos al final de la lista
-//        list.add(new Entry(key, value));
-    
 
     public User search(String key, String key2) {
     int index = hashFunction(key,key2);
@@ -110,3 +92,21 @@ public class HashTable<T> {
 
     }
 }
+
+//        for (User entry : table[index]) {
+//            if (entry.getKey() == key) {
+//                // Si la clave ya existe, actualizamos el valor
+//                entry.setValue(value);
+//                return;
+//            }
+//
+//        for (Entry entry : list) {
+//            if (entry.getKey() == key) {
+//                // Si la clave ya existe, actualizamos el valor
+//                entry.setValue(value);
+//                return;
+//            }
+//        }
+//
+//        // Si la clave no existe, la insertamos al final de la lista
+//        list.add(new Entry(key, value));
