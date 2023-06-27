@@ -308,6 +308,19 @@ public class Lista<T> {
             sort();
         }
     }
+    public T search2(T data)  {
+        Nodo aux = head;
+        while (aux != null) {
+            String[] numeros = (String[]) aux.getDato();
+            if ((int) data==Integer.parseInt(numeros[1])  ) {
+                    return (T)aux.getDato();
+                
+            }
+
+            aux = aux.getNext();
+        }
+        return null;
+    }
 
 }
 
