@@ -19,7 +19,6 @@ public class PruebasProyecto2 {
         // TODO code application logic here
         MainUI m= new MainUI();
         m.leerExcel();
-        m.pruebas();
     }
     
 }
