@@ -4,6 +4,7 @@
  */
 package MainUI;
 
+import App.App;
 import HashTable.HashTable;
 import javax.swing.JFrame;
 
@@ -12,14 +13,22 @@ import javax.swing.JFrame;
  * @author User
  */
 public class MainUI extends javax.swing.JFrame {
-    HashTable b;
+    // HashTable class
+    HashTable hashTable;
+    
+    // Name of principal GUI
     static String nameUI;
+    
+    // App class
+    static App app;
 
+    // <editor-fold defaultstate="collapsed" desc="Constructor"> 
     /**
      * Creates new form MainUI
      * @param nameUI
+     * @param appClass
      */
-    public MainUI(String nameUI) {
+    public MainUI(String nameUI, App appClass) {
         // Ignore
         initComponents();
         
@@ -31,9 +40,11 @@ public class MainUI extends javax.swing.JFrame {
         this.setTitle(nameUI);
 
         // Utils
-        b = new HashTable(2);
+        app = appClass;
+        hashTable = new HashTable(2);
     }
-
+    // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -130,23 +141,23 @@ public class MainUI extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Events">     
     private void searchReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReservationActionPerformed
-        // TODO add your handling code here:
+        app.searchReservation();
     }//GEN-LAST:event_searchReservationActionPerformed
 
     private void searchHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHistoryActionPerformed
-        // TODO add your handling code here:
+        app.searchBedroomHistorial();
     }//GEN-LAST:event_searchHistoryActionPerformed
 
     private void checkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInActionPerformed
-        // TODO add your handling code here:
+        app.checkIn();
     }//GEN-LAST:event_checkInActionPerformed
 
     private void checkOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutActionPerformed
-        // TODO add your handling code here:
+        app.checkOut();
     }//GEN-LAST:event_checkOutActionPerformed
 
     private void searchClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientActionPerformed
-        // TODO add your handling code here:
+        app.searchHosted();
     }//GEN-LAST:event_searchClientActionPerformed
     // </editor-fold>     
     
@@ -177,7 +188,7 @@ public class MainUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new MainUI(nameUI).setVisible(true);
+            new MainUI(nameUI, app).setVisible(true);
         });
     }
     // </editor-fold>
