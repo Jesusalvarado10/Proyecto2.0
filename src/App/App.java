@@ -15,12 +15,8 @@ public class App {
     private String title = "CRUD project in java";
     private ExcelManager exm = new ExcelManager();
     
-    public void Start(){
+    public void start(){
         this.openUI();
-    }
-
-    public void testExcel(){
-        exm.leerExcel();
     }
     
     private void openUI(){

@@ -17,6 +17,6 @@ public class PruebasProyecto2 {
      */
     public static void main(String[] args) {
         App app = new App();
-        app.Start();
+        app.start();
     }
 }

@@ -16,6 +16,11 @@ public class HashTable<T> {
     Lista<User>[] table;
     int size;
 
+    /**
+     * Construye la HashTable según el tamaño pasado por parámetro
+     *
+     * @param n Tamaño del HastTable: (n) es...
+     */
     public HashTable(int n) {
         size = n;
         table = new Lista[n];
@@ -27,10 +32,12 @@ public class HashTable<T> {
 
     private int hashFunction(String key, String key2) {
         int value = 0;
+
         for (int i = 0; i < key.length(); i++) {
             char caracter = key.charAt(i);
             value += (int) caracter;
         }
+
         for (int i = 0; i < key2.length(); i++) {
             char caracter = key2.charAt(i);
             value += (int) caracter;
@@ -55,29 +62,27 @@ public class HashTable<T> {
     }
 
     public void insert(T value) {
-        User u= (User)value;
-        int index = hashFunction(u.getName(),u.getLast_name());
+        User u = (User) value;
+        int index = hashFunction(u.getName(), u.getLast_name());
         Lista<User> list = table[index];
-       list.addLast((User)u);
-        }
+        list.addLast((User) u);
+    }
 
     public User search(String key, String key2) {
-    int index = hashFunction(key,key2);
-    Lista list = table[index];
-    if(list.isEmpty()){
-    return null;
-    }else {
-        System.out.println("safklfakfak;lfkls;a");
-        return (User)list.getDato(key, key2);
-    }
-    
+        int index = hashFunction(key, key2);
+        Lista list = table[index];
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            System.out.println("safklfakfak;lfkls;a");
+            return (User) list.getDato(key, key2);
+        }
+
     }
 
-    public void delete(String key,String key2) {
+    public void delete(String key, String key2) {
         int index = hashFunction(key, key2);
         table[index] = null;
-        return;
-
     }
 
     public void show() {

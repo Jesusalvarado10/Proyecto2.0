@@ -11,12 +11,13 @@ import ArbolesBinarios.Arbol;
  * @author User
  */
 public class Bedroom {
+
     private String type;
     private int floor;
     private boolean occupied;
     private Arbol tree;
 
-    public Bedroom( String type, int floor) {
+    public Bedroom(String type, int floor) {
         this.type = type;
         this.floor = floor;
     }
@@ -44,9 +45,10 @@ public class Bedroom {
     public void setFloor(int floor) {
         this.floor = floor;
     }
-    public void show(){
-    System.out.println(type);
-    System.out.println(floor);
-    
+
+    public void show() {
+        System.out.println(type);
+        System.out.println(floor);
+
     }
 }
