@@ -4,6 +4,8 @@
  */
 package ArbolesBinarios;
 
+import User.User;
+
 /**
  *
  * @author User
@@ -14,6 +16,14 @@ public class Arbol {
 
     public Arbol() {
         this.pRoot = null;
+    }
+
+    public Nodo getpRoot() {
+        return pRoot;
+    }
+
+    public void setpRoot(Nodo pRoot) {
+        this.pRoot = pRoot;
     }
 
     public void insert(Nodo pRoot, Nodo aux) {
@@ -64,7 +74,8 @@ public class Arbol {
 
     public void preOrder(Nodo root) {
         if (root != null) {
-            System.out.print(root.getDato() + ",");
+            User u = (User)root.getDato();
+            u.show();
             inOrder(root.getLeft());
             inOrder(root.getRight());
         }

@@ -32,8 +32,4 @@ Nodo next;
     public void setNext(Nodo next) {
         this.next = next;
     }
-
- 
-    
-
 }

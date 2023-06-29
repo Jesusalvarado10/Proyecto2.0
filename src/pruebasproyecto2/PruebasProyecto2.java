@@ -4,7 +4,8 @@
  */
 package pruebasproyecto2;
 
-import MainUI.MainUI;
+import App.App;
+import ExcelManager.ExcelManager;
 
 /**
  *
@@ -16,9 +17,10 @@ public class PruebasProyecto2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        MainUI m= new MainUI();
-        m.leerExcel();
+        ExcelManager p= new ExcelManager();
+        p.leerExcel();
+        
+//        App app = new App();
+//        app.start();
     }
-    
 }
