@@ -89,6 +89,7 @@ public class User {
         this.phone = phone;
     }
     // </editor-fold> 
+    
 
     // <editor-fold defaultstate="collapsed" desc="Phone">
     /**
