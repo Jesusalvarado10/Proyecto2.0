@@ -4,6 +4,8 @@
  */
 package ArbolesBinarios;
 
+import User.User;
+
 /**
  *
  * @author User
@@ -72,7 +74,8 @@ public class Arbol {
 
     public void preOrder(Nodo root) {
         if (root != null) {
-            System.out.print(root.getDato() + ",");
+            User u = (User)root.getDato();
+            u.show();
             inOrder(root.getLeft());
             inOrder(root.getRight());
         }

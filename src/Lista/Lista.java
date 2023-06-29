@@ -281,8 +281,7 @@ public class Lista<T> {
         Nodo aux = head;
         while (aux != null) {
             Reservation r = (Reservation) aux.getDato();
-            r.getUser().show();
-            r.getDni();
+            r.show();
             aux = aux.next;
         }
     }
@@ -369,6 +368,36 @@ public class Lista<T> {
             aux = aux.getNext();
         }
         return false;
+    }
+
+    public Lista copyList() {
+        Lista n = new Lista();
+        Nodo aux = head;
+        while (aux != null) {
+            n.addLast(aux.getDato());
+            aux = aux.getNext();
+
+        }
+        return n;
+
+    }
+
+    public Reservation seachBina(T dni, Lista aux) {
+        Nodo middle = getMiddle(aux.getHead());
+        Reservation r = (Reservation) middle.getDato();
+        if (r.getDni() < (int) dni) {
+            aux.setHead(middle);
+            return seachBina(dni, aux);
+        } else if (r.getDni() > (int) dni) {
+            middle.setNext(null);
+            aux.setTail(middle);
+            return seachBina(dni, aux);
+        } else if (r.getDni() == (int) dni) {
+            return (Reservation) middle.getDato();
+        } else {
+            return null;
+        }
+
     }
 
     /**

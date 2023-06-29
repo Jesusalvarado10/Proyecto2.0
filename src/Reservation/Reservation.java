@@ -57,7 +57,7 @@ public class Reservation {
     // <editor-fold defaultstate="collapsed" desc="Show">   
     public void show() {
         System.out.println(user.getDni());
-        System.out.println(user.getName());
+        user.show();
     }
     // </editor-fold>  
 }

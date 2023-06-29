@@ -47,26 +47,29 @@ public class ExcelManager {
                 case "Reservas":
 
                     Lista reservas = reservas(hoja);
-                    reservas.sort();
-                    reservas.show();
+//                    reservas.sort();
+//                    Lista p = reservas.copyList();
+//                    p.show();
+//                    Reservation d = (Reservation) reservas.seachBina(111335, p);
+//                    d.show();
                     break;
-//                case "Habitaciones":
+                case "Habitaciones":
+
+                    habs = Habitaciones(hoja);
+                    break;
 //
-//                    habs = Habitaciones(hoja);
-//                    break;
-//
-//                case "Estado":
-//                    if (habs == null) {
-//                        throw new Error("Error");
-//                    }
-//                    // HashTable statusHabs = status(hoja, habs);
-//                    break;
-//                case "Historico":
-//                    if (habs == null) {
-//                        throw new Error("Error");
-//                    }
-//                    historico(hoja, habs);
-//                    break;
+                case "Estado":
+                    if (habs == null) {
+                        throw new Error("Error");
+                    }
+                    HashTable statusHabs = status(hoja, habs);
+                    break;
+                case "Historico":
+                    if (habs == null) {
+                        throw new Error("Error");
+                    }
+                    historico(hoja, habs);
+                    break;
             }
         }
     }
@@ -300,16 +303,14 @@ public class ExcelManager {
             if (row != null) {
                 int cellIndexStart = row.getFirstCellNum(); // Índice de la primera celda
                 int cellIndexEnd = row.getLastCellNum();
-
+                String type = "";
+                int piso = 0;
+                String x = "";
                 for (int cellIndex = cellIndexStart; cellIndex < cellIndexEnd; cellIndex++) {
                     columna = row.getCell(cellIndex); // Obtiene la celda por índice
 
                     //Cogemos la siguiente fila
                     //Cogemos todas las celdas de esa fila
-                    String type = "";
-                    int piso = 0;
-                    String x = "";
-
                     //REcorremos todas las celdas
                     n++;
                     //Cogemos la siguiente fila
@@ -363,6 +364,8 @@ public class ExcelManager {
         for (int i = 0; i < habitaciones.size(); i++) {
 
             habs[i] = (Bedroom) habitaciones.getValuePosition(i);
+//            habs[i].show();
+//            System.out.println(i);
         }
         return habs;
 
@@ -372,7 +375,7 @@ public class ExcelManager {
         Lista ord = new Lista();
         int n = 0;
         int rowIndex = 0; // Índice de la primera fila
-
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Row row = hoja.getRow(rowIndex); // Obtiene la primera fila
 
         if (row != null) {
@@ -437,56 +440,53 @@ public class ExcelManager {
             if (row != null) {
                 int cellIndexStart = row.getFirstCellNum(); // Índice de la primera celda
                 int cellIndexEnd = row.getLastCellNum();
-
+                String name = "";
+                String last_name = "";
+                String gener = "";
+                String email = "";
+                String phone = "";
+                String ride = "";
+                int num = 0;
                 for (int cellIndex = cellIndexStart; cellIndex < cellIndexEnd; cellIndex++) {
                     columna = row.getCell(cellIndex); // Obtiene la celda por índice
 
-                    String name = "";
-                    String last_name = "";
-                    String gener = "";
-                    String email = "";
-                    String phone = "";
-                    String ride = "";
-                    int num = 0;
                     //REcorremos todas las celdas
-
                     n++;
-                    System.out.println(n);
+//                    System.out.println(n);
                     //Cogemos la siguiente fila
                     //Segun el tipo de celda, usaremos uno u otra funcion
                     String[] orden = (String[]) ord.search2(n);
-                    System.out.println(orden[0]);
+//                    System.out.println(orden[0]);
                     switch (orden[0]) {
                         case "num_hab":
                             num = (int) columna.getNumericCellValue();
-                            System.out.println(num);
+//                            System.out.println(num);
                             break;
                         case "primer_nombre":
                             name = columna.getStringCellValue();
-                            System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
 
                         case "apellido":
                             last_name = columna.getStringCellValue();
-                            System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "email":
                             email = columna.getStringCellValue();
-                            System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "genero":
                             gener = columna.getStringCellValue();
-                            System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "celular":
                             phone = columna.getStringCellValue();
                             break;
                         case "llegada":
-                            String a = String.valueOf(columna.getDateCellValue());
-                            ride = a;
-                            System.out.println("Fecha: " + a);
+                            Date a = columna.getDateCellValue();
+                            ride = sdf.format(a);
+//                            System.out.println("Fecha: " + a);
                             break;
-
                     }
 
                     if (!"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(phone) && num != 0 && !"".equals(ride)) {
@@ -618,6 +618,14 @@ public class ExcelManager {
 
         for (int p = 1; p <= rowIndexEnd; p++) {
             row = hoja.getRow(p); // Obtiene la fila por índice
+            int dni = 0;
+            String name = "";
+            String last_name = "";
+            String gener = "";
+            String email = "";
+            String ride = "";
+            int num = 0;
+            String phone = "";
             n = 0;
             if (row != null) {
                 int cellIndexStart = row.getFirstCellNum(); // Índice de la primera celda
@@ -625,14 +633,6 @@ public class ExcelManager {
 
                 for (int cellIndex = cellIndexStart; cellIndex < cellIndexEnd; cellIndex++) {
                     columna = row.getCell(cellIndex); // Obtiene la celda por índice
-                    int dni = 0;
-                    String name = "";
-                    String last_name = "";
-                    String gener = "";
-                    String email = "";
-                    String ride = "";
-                    int num = 0;
-                    String phone = "";
 
 //                REcorremos todas las celdas
                     n++;
@@ -646,48 +646,53 @@ public class ExcelManager {
                             value = value.replace(".", "");
                             value = value.replace("E7", "");
                             dni = Integer.parseInt(value);
-                            System.out.println(value);
+//                            System.out.println(value);
                             break;
                         case "primer_nombre":
                             name = columna.getStringCellValue();
-                            System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
 
                         case "apellido":
                             last_name = columna.getStringCellValue();
-                            System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "email":
                             email = columna.getStringCellValue();
-                            System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "genero":
                             gener = columna.getStringCellValue();
-                            System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "llegada":
-                            String a = String.valueOf(columna.getDateCellValue());
-                            ride = a;
-
-                            System.out.println("Fecha: " + a);
+                            Date a = columna.getDateCellValue();
+                            ride = sdf.format(a);
+//
+//                            System.out.println("Fecha: " + a);
                             break;
                         case "num_hab":
                             num = (int) columna.getNumericCellValue();
-                            System.out.println(num);
+//                            System.out.println(num);
                             break;
 
                     }
-                    if (num != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && num != 0 && !"".equals(ride) && !"".equals(phone)) {
+                    if (dni != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(phone) && num != 0 && !"".equals(ride)) {
                         User u = new User(dni, name, last_name, gener, email, phone);
                         u.setRide(ride);
                         u.setNum(num);
                         u.show();
+                        System.out.println(num);
                         Nodo aux = new Nodo(u);
                         Nodo root = (Nodo) habs[num].getTree().getpRoot();
                         habs[num].getTree().insert(root, aux);
-
                     }
+
                 }
+//                if (dni != 0 && num != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(ride) && !"".equals(phone)) {
+//
+////                        habs[num].getTree().preOrder(root);
+//                }
 //            try {
 
 //            } catch (Exception e) {
