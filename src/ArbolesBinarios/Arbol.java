@@ -16,6 +16,14 @@ public class Arbol {
         this.pRoot = null;
     }
 
+    public Nodo getpRoot() {
+        return pRoot;
+    }
+
+    public void setpRoot(Nodo pRoot) {
+        this.pRoot = pRoot;
+    }
+
     public void insert(Nodo pRoot, Nodo aux) {
         if (this.pRoot == null) {
             this.pRoot = aux;

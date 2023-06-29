@@ -5,6 +5,7 @@
 package pruebasproyecto2;
 
 import App.App;
+import ExcelManager.ExcelManager;
 
 /**
  *
@@ -16,7 +17,10 @@ public class PruebasProyecto2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        App app = new App();
-        app.start();
+        ExcelManager p= new ExcelManager();
+        p.leerExcel();
+        
+//        App app = new App();
+//        app.start();
     }
 }

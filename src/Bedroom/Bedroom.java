@@ -22,6 +22,15 @@ public class Bedroom {
         this.floor = floor;
     }
 
+    public Arbol getTree() {
+        return tree;
+    }
+
+    public void setTree(Arbol tree) {
+        this.tree = tree;
+    }
+    
+
     public boolean isOccupied() {
         return occupied;
     }

@@ -4,6 +4,7 @@
  */
 package Lista;
 
+import Reservation.Reservation;
 import User.User;
 import javax.swing.JOptionPane;
 
@@ -68,8 +69,10 @@ public class Lista<T> {
         antes = null;
         boolean iteraccion = false;
         while (siguiente != null) {
+            Reservation r = (Reservation) pivot.getDato();
+            Reservation a = (Reservation) siguiente.getDato();
             if (antes == null) {
-                if ((int) pivot.getDato() > (int) siguiente.getDato()) {
+                if ((int) r.getDni() > (int) a.getDni()) {
                     pivot.setNext(siguiente.getNext());
                     antes = siguiente;
                     antes.setNext(pivot);;
@@ -82,7 +85,7 @@ public class Lista<T> {
                     siguiente = pivot.getNext();
                 }
             } else {
-                if ((int) pivot.getDato() > (int) siguiente.getDato()) {
+                if ((int) r.getDni() > (int) a.getDni()) {
                     pivot.setNext(siguiente.getNext());
                     siguiente.setNext(pivot);
                     antes.setNext(siguiente);
@@ -99,6 +102,52 @@ public class Lista<T> {
         if (iteraccion == true) {
             sort();
         }
+    }
+
+    public Nodo mergeSort(Nodo node) {
+        if (node == null || node.getNext() == null) {
+            return node;
+        }
+        Nodo middle = getMiddle(node);
+        Nodo nextOfMiddle = middle.getNext();
+        middle.setNext(null);
+        Nodo left = mergeSort(node);
+        Nodo right = mergeSort(nextOfMiddle);
+        Nodo sortedList = merge(left, right);
+        return sortedList;
+    }
+
+    private Nodo getMiddle(Nodo node) {
+        if (node == null) {
+            return node;
+        }
+        Nodo slow = node;
+        Nodo fast = node;
+        while (fast.getNext() != null && fast.getNext().getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+        return slow;
+    }
+
+    private Nodo merge(Nodo left, Nodo right) {
+        Nodo sortedList = null;
+        if (left == null) {
+            return right;
+        }
+        if (right == null) {
+            return left;
+        }
+        Reservation r = (Reservation) left.getDato();
+        Reservation a = (Reservation) left.getDato();
+        if (r.getUser().getDni() <= a.getUser().getDni()) {
+            sortedList = left;
+            sortedList.setNext(merge(left.getNext(), right));
+        } else {
+            sortedList = right;
+            sortedList.setNext(merge(left, right.getNext()));
+        }
+        return sortedList;
     }
 
     public int size() {
@@ -231,8 +280,9 @@ public class Lista<T> {
     public void show() {
         Nodo aux = head;
         while (aux != null) {
-            User r = (User) aux.getDato();
-            r.show();
+            Reservation r = (Reservation) aux.getDato();
+            r.getUser().show();
+            r.getDni();
             aux = aux.next;
         }
     }
@@ -283,9 +333,10 @@ public class Lista<T> {
     }
 
     /**
-     * ????? 
+     * ?????
+     *
      * @param dato
-     * @return 
+     * @return
      */
     public int getPosicion(T dato) {
         Nodo aux = head;
@@ -302,8 +353,8 @@ public class Lista<T> {
 
     /**
      * Busca con el (nombre) y el (apellido) de la persona, el nodo
-     * 
-     * 
+     *
+     *
      * @param data Nombre de la persona
      * @param data2 Apellido de la persona
      * @return True si existe el nodo. False si no existe
@@ -322,7 +373,7 @@ public class Lista<T> {
 
     /**
      * Elimina el nodo de la lista
-     * 
+     *
      * @param data Tipo de dato (User, reservation, bedroom, etc)
      */
     public void delete(T data) {
@@ -349,9 +400,9 @@ public class Lista<T> {
 
     /**
      * ?????
-     * 
+     *
      * @param data
-     * @return 
+     * @return
      */
     public T search2(T data) {
         Nodo aux = head;

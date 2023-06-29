@@ -5,13 +5,16 @@
  */
 package ExcelManager;
 
+import ArbolesBinarios.Nodo;
 import Bedroom.Bedroom;
 import HashTable.HashTable;
 import Lista.Lista;
+
 import Reservation.Reservation;
 import User.User;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,7 +26,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Daniel
  */
 public class ExcelManager {
-    public void leerExcel(){
+
+    public void leerExcel() {
         // ---------------------------------------------------------------------
         XSSFWorkbook libro = null;
         // ---------------------------------------------------------------------
@@ -31,7 +35,8 @@ public class ExcelManager {
             //abrimos el XSSFWorkbook
             FileInputStream f = new FileInputStream("C:\\Users\\User\\Desktop\\Trabajo.xlsx");
             libro = new XSSFWorkbook(f);
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         // ---------------------------------------------------------------------
         Bedroom[] habs = null;
         int maximoIndice = libro.getNumberOfSheets();
@@ -39,32 +44,33 @@ public class ExcelManager {
             XSSFSheet hoja = libro.getSheetAt(i);
             String nombreHoja = hoja.getSheetName();
             switch (nombreHoja) {
-//                case "Reservas":
-//
-//                    Lista reservas = reservas(hoja);
-//                    System.out.println(reservas.size());
-//                    break;
-                case "Habitaciones":
-                    System.out.println("skfaklfsalfkf;af");
-                    habs = Habitaciones(hoja);
-                    break;
+                case "Reservas":
 
-                case "Estado":
-                    if (habs == null) {
-                        throw new Error("Error");
-                    }
-                    // HashTable statusHabs = status(hoja, habs);
+                    Lista reservas = reservas(hoja);
+                    reservas.sort();
+                    reservas.show();
                     break;
-                case "Historico":
-                    if (habs == null) {
-                        throw new Error("Error");
-                    }
-                    historico(hoja, habs);
-                    break;
+//                case "Habitaciones":
+//
+//                    habs = Habitaciones(hoja);
+//                    break;
+//
+//                case "Estado":
+//                    if (habs == null) {
+//                        throw new Error("Error");
+//                    }
+//                    // HashTable statusHabs = status(hoja, habs);
+//                    break;
+//                case "Historico":
+//                    if (habs == null) {
+//                        throw new Error("Error");
+//                    }
+//                    historico(hoja, habs);
+//                    break;
             }
         }
     }
-    
+
     public Lista reservas(XSSFSheet hoja) {
         Lista ord = new Lista();
         int n = 0;
@@ -153,29 +159,27 @@ public class ExcelManager {
             if (row != null) {
                 int cellIndexStart = row.getFirstCellNum(); // Índice de la primera celda
                 int cellIndexEnd = row.getLastCellNum();
-
+                int dni = 0;
+                String name = "";
+                String last_name = "";
+                String gener = "";
+                String email = "";
+                String phone = "";
+                String ride = "";
+                String departure = "";
+                String type = "";
                 for (int cellIndex = cellIndexStart; cellIndex < cellIndexEnd; cellIndex++) {
                     columna = row.getCell(cellIndex); // Obtiene la celda por índice
 
 //                Cogemos la siguiente fila
 //
 //                Cogemos todas las celdas de esa fila
-                    int dni = 0;
-                    String name = "";
-                    String last_name = "";
-                    String gener = "";
-                    String email = "";
-                    String phone = "";
-                    String ride = "";
-                    String departure = "";
-                    String type = "";
-
 //                REcorremos todas las celdas
                     n++;
 //                    Cogemos la siguiente fila
 
                     String[] orden = (String[]) ord.search2(n);
-                    System.out.println(orden[0]);
+
                     switch (orden[0]) {
                         case "ci":
                             double i = columna.getNumericCellValue();
@@ -183,57 +187,55 @@ public class ExcelManager {
                             value = value.replace(".", "");
                             value = value.replace("E7", "");
                             dni = Integer.parseInt(value);
-//                        System.out.println(value);
+//                            System.out.println(dni);
                             break;
                         case "primer_nombre":
                             name = columna.getStringCellValue();
-//                        System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
 
                         case "segundo_nombre":
                             last_name = columna.getStringCellValue();
-//                        System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "email":
                             email = columna.getStringCellValue();
-//                        System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "genero":
                             gener = columna.getStringCellValue();
-//                        System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "tipo_hab":
                             type = columna.getStringCellValue();
-//                        System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "celular":
                             phone = columna.getStringCellValue();
-//                        System.out.println(columna.getStringCellValue());
+//                            System.out.println(columna.getStringCellValue());
                             break;
                         case "llegada":
-                            String a = String.valueOf(columna.getDateCellValue());
-                            ride = a;
+                            Date a = columna.getDateCellValue();
+                            ride = sdf.format(a);
 
-//                        System.out.println("Fecha: " + a);
+//                            System.out.println("Fecha: " + a);
                             break;
                         case "salida":
-                            String b = String.valueOf(columna.getDateCellValue());
-                            departure = b;
-//                        System.out.println("Fecha: " + b);
+                            Date b = columna.getDateCellValue();
+                            departure = sdf.format(b);
+//                            System.out.println("Fecha: " + b);
                             break;
 
                     }
-
-                    try {
-                        if (!"".equals(departure)) {
-                            User u = new User(dni, name, last_name, gener, email, phone);
-                            u.setRide(ride);
-                            u.setDeparture(departure);
-                            Reservation r = new Reservation(u, type);
-                            reservaciones.addLast(r);
-                        }
-                    } catch (Exception e) {
+                    if (!"".equals(type) && !"".equals(ride) && !"".equals(departure) && !"".equals(last_name)
+                            && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(phone) && dni != 0) {
+                        User u = new User(dni, name, last_name, gener, email, phone);
+                        u.setRide(ride);
+                        u.setDeparture(departure);
+                        Reservation r = new Reservation(u, type);
+                        reservaciones.addLast(r);
                     }
+
                 }
             }
         }
@@ -345,10 +347,9 @@ public class ExcelManager {
 ////                }
 ////            }
 ////            if (o != 0) {
-                    try {
+                    if (!"".equals(type) && piso != 0) {
                         Bedroom b = new Bedroom(type, piso);
                         habitaciones.addLast(b);
-                    } catch (Exception e) {
 
                     }
 
@@ -488,17 +489,14 @@ public class ExcelManager {
 
                     }
 
-                    try {
-                        if ("".equals(ride)) {
-                            User u = new User(name, last_name, gener, email, phone);
-                            u.setRide(ride);
-                            u.setNum(num);
-
-                            habs[num - 1].setOccupied(true);
-                            b.insert(u);
-                        }
-                    } catch (Exception e) {
+                    if (!"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(phone) && num != 0 && !"".equals(ride)) {
+                        User u = new User(name, last_name, gener, email, phone);
+                        u.setRide(ride);
+                        u.setNum(num);
+                        habs[num - 1].setOccupied(true);
+                        b.insert(u);
                     }
+
                 }
 
 //                if (o != 0) {
@@ -596,7 +594,7 @@ public class ExcelManager {
                         posicion[1] = p;
                         ord.addLast(posicion);
                     } else if ("num_hab".equals(cell.getStringCellValue())) {
-                        posicion[0] = "salida";
+                        posicion[0] = "num_hab";
                         String p = String.valueOf(n);
                         posicion[1] = p;
                         ord.addLast(posicion);
@@ -634,6 +632,7 @@ public class ExcelManager {
                     String email = "";
                     String ride = "";
                     int num = 0;
+                    String phone = "";
 
 //                REcorremos todas las celdas
                     n++;
@@ -678,16 +677,19 @@ public class ExcelManager {
                             break;
 
                     }
+                    if (num != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && num != 0 && !"".equals(ride) && !"".equals(phone)) {
+                        User u = new User(dni, name, last_name, gener, email, phone);
+                        u.setRide(ride);
+                        u.setNum(num);
+                        u.show();
+                        Nodo aux = new Nodo(u);
+                        Nodo root = (Nodo) habs[num].getTree().getpRoot();
+                        habs[num].getTree().insert(root, aux);
 
+                    }
                 }
 //            try {
-//                if (!"".equals(departure)) {
-//                    User u = new User(dni, name, last_name, gener, email, phone);
-//                    u.setRide(ride);
-//                    u.setDeparture(departure);
-//                    Reservation r = new Reservation(u, type);
-//                    reservaciones.addLast(r);
-//                }
+
 //            } catch (Exception e) {
 //            }
 //        }}
@@ -788,4 +790,4 @@ public class ExcelManager {
 //        } catch (Exception e) {
 //            System.out.print("Error");
 //
-*/
+ */
