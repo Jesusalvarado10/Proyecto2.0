@@ -5,6 +5,7 @@
  */
 package ExcelManager;
 
+import ArbolesBinarios.Arbol;
 import ArbolesBinarios.Nodo;
 import Bedroom.Bedroom;
 import HashTable.HashTable;
@@ -646,52 +647,51 @@ public class ExcelManager {
                             value = value.replace(".", "");
                             value = value.replace("E7", "");
                             dni = Integer.parseInt(value);
-//                            System.out.println(value);
+                            //     System.out.println(dni);
                             break;
                         case "primer_nombre":
                             name = columna.getStringCellValue();
-//                            System.out.println(columna.getStringCellValue());
+                            //     System.out.println(name);
                             break;
 
                         case "apellido":
                             last_name = columna.getStringCellValue();
-//                            System.out.println(columna.getStringCellValue());
+                            //      System.out.println(last_name);
                             break;
                         case "email":
                             email = columna.getStringCellValue();
-//                            System.out.println(columna.getStringCellValue());
+                            //                     System.out.println(email);
                             break;
                         case "genero":
                             gener = columna.getStringCellValue();
-//                            System.out.println(columna.getStringCellValue());
+                            //                            System.out.println(gener);
                             break;
                         case "llegada":
                             Date a = columna.getDateCellValue();
                             ride = sdf.format(a);
 //
-//                            System.out.println("Fecha: " + a);
+//                            System.out.println("Fecha: " + ride);
                             break;
                         case "num_hab":
                             num = (int) columna.getNumericCellValue();
-//                            System.out.println(num);
+                            //    System.out.println(num);
                             break;
 
                     }
-                    if (dni != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(phone) && num != 0 && !"".equals(ride)) {
+
+                    if (dni != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && num != 0 && !"".equals(ride)) {
                         User u = new User(dni, name, last_name, gener, email, phone);
                         u.setRide(ride);
                         u.setNum(num);
-                        u.show();
-                        System.out.println(num);
                         Nodo aux = new Nodo(u);
-                        Nodo root = (Nodo) habs[num].getTree().getpRoot();
-                        habs[num].getTree().insert(root, aux);
+                        habs[num - 1].getTree().insert(habs[num - 1].getTree().getpRoot(), aux);
+//                        habs[num].getTree().preOrder(root.getpRoot());
                     }
 
                 }
 //                if (dni != 0 && num != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(ride) && !"".equals(phone)) {
 //
-////                        habs[num].getTree().preOrder(root);
+////                        
 //                }
 //            try {
 
@@ -701,6 +701,12 @@ public class ExcelManager {
 //        return reservaciones;
             }
         }
+        for (int i = 0; i < habs.length; i++) {
+            System.out.println("\n\n\n\n\n\n\n\n");
+            habs[i].getTree().inOrder(habs[i].getTree().getpRoot());
+
+        }
+
     }
 }
 

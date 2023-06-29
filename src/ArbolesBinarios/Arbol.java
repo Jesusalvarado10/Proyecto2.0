@@ -30,13 +30,15 @@ public class Arbol {
         if (this.pRoot == null) {
             this.pRoot = aux;
         } else {
-            if ((int) aux.getDato() < (int) pRoot.getDato()) {
+            User u = (User) aux.getDato();
+            User p = (User) pRoot.getDato();
+            if (u.getDni() < p.getDni()) {
                 if (pRoot.getLeft() == null) {
                     pRoot.setLeft(aux);
                 } else {
                     insert(pRoot.getLeft(), aux);
                 }
-            } else if ((int) aux.getDato() > (int) pRoot.getDato()) {
+            } else if (u.getDni() > p.getDni()) {
                 if (pRoot.getRight() == null) {
                     pRoot.setRight(aux);
                 } else {
@@ -67,24 +69,25 @@ public class Arbol {
     public void inOrder(Nodo root) {
         if (root != null) {
             inOrder(root.getLeft());
-            System.out.print(root.getDato() + ",");
+            User u = (User) root.getDato();
+            u.show();
+            System.out.println("Piso " + u.getNum());
             inOrder(root.getRight());
         }
     }
 
     public void preOrder(Nodo root) {
         if (root != null) {
-            User u = (User)root.getDato();
-            u.show();
-            inOrder(root.getLeft());
-            inOrder(root.getRight());
+            ;
+            preOrder(root.getLeft());
+            preOrder(root.getRight());
         }
     }
 
     public void postOrder(Nodo root) {
         if (root != null) {
-            inOrder(root.getLeft());
-            inOrder(root.getRight());
+            postOrder(root.getLeft());
+            postOrder(root.getRight());
             System.out.print(root.getDato() + ",");
         }
     }

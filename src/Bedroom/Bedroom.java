@@ -20,6 +20,7 @@ public class Bedroom {
     public Bedroom(String type, int floor) {
         this.type = type;
         this.floor = floor;
+        this.tree = new Arbol();
     }
 
     public Arbol getTree() {
@@ -29,7 +30,6 @@ public class Bedroom {
     public void setTree(Arbol tree) {
         this.tree = tree;
     }
-    
 
     public boolean isOccupied() {
         return occupied;
