@@ -5,6 +5,7 @@
  */
 package ExcelManager;
 
+import App.App;
 import ArbolesBinarios.Arbol;
 import ArbolesBinarios.Nodo;
 import Bedroom.Bedroom;
@@ -40,6 +41,8 @@ public class ExcelManager {
         }
         // ---------------------------------------------------------------------
         Bedroom[] habs = null;
+        Lista reservas=null;
+         HashTable statusHabs=null;
         int maximoIndice = libro.getNumberOfSheets();
         for (int i = 0; i < maximoIndice; i++) {
             XSSFSheet hoja = libro.getSheetAt(i);
@@ -47,7 +50,7 @@ public class ExcelManager {
             switch (nombreHoja) {
                 case "Reservas":
 
-                    Lista reservas = reservas(hoja);
+                     reservas = reservas(hoja);
 //                    reservas.sort();
 //                    Lista p = reservas.copyList();
 //                    p.show();
@@ -63,7 +66,7 @@ public class ExcelManager {
                     if (habs == null) {
                         throw new Error("Error");
                     }
-                    HashTable statusHabs = status(hoja, habs);
+                     statusHabs = status(hoja, habs);
                     break;
                 case "Historico":
                     if (habs == null) {
@@ -73,6 +76,8 @@ public class ExcelManager {
                     break;
             }
         }
+        App app= new App();
+        
     }
 
     public Lista reservas(XSSFSheet hoja) {
@@ -701,11 +706,7 @@ public class ExcelManager {
 //        return reservaciones;
             }
         }
-        for (int i = 0; i < habs.length; i++) {
-            System.out.println("\n\n\n\n\n\n\n\n");
-            habs[i].getTree().inOrder(habs[i].getTree().getpRoot());
-
-        }
+     
 
     }
 }
