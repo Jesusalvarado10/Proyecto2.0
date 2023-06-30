@@ -71,7 +71,7 @@ public class Arbol {
             inOrder(root.getLeft());
             User u = (User) root.getDato();
             u.show();
-            System.out.println("Piso " + u.getNum());
+            System.out.println("Habitacion  " + u.getNum());
             inOrder(root.getRight());
         }
     }

@@ -145,15 +145,15 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_searchReservationActionPerformed
 
     private void searchHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHistoryActionPerformed
-        app.searchBedroomHistorial();
+//        app.searchBedroomHistorial();
     }//GEN-LAST:event_searchHistoryActionPerformed
 
     private void checkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInActionPerformed
-        app.checkIn();
+//        app.checkIn();
     }//GEN-LAST:event_checkInActionPerformed
 
     private void checkOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutActionPerformed
-        app.checkOut();
+//        app.checkOut();
     }//GEN-LAST:event_checkOutActionPerformed
 
     private void searchClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientActionPerformed
