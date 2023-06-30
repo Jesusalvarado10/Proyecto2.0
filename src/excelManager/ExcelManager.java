@@ -466,10 +466,10 @@ public class ExcelManager {
                             num = (int) columna.getNumericCellValue();
                             break;
                         case "primer_nombre":
-                            name = columna.getStringCellValue();
+                            name = columna.getStringCellValue().toLowerCase();
                             break;
                         case "apellido":
-                            last_name = columna.getStringCellValue();
+                            last_name = columna.getStringCellValue().toLowerCase();
                             break;
                         case "email":
                             email = columna.getStringCellValue();

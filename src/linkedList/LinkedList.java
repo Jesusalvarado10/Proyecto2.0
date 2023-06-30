@@ -48,7 +48,7 @@ public class LinkedList<T> {
     public boolean isEmpty() {
         return head == null;
     }
-    
+
     public int size() {
         Node aux = head;
         int i = 0;
@@ -59,7 +59,7 @@ public class LinkedList<T> {
         return i;
     }
     // </editor-fold> 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Advance functions">   
     public LinkedList rotate() {
         Node aux = head;
@@ -71,7 +71,7 @@ public class LinkedList<T> {
 
         return volteada;
     }
-    
+
     public void sort() {
         Node pivot = head;
         Node siguiente;
@@ -114,7 +114,7 @@ public class LinkedList<T> {
             sort();
         }
     }
-    
+
     public Node mergeSort(Node node) {
         if (node == null || node.getNext() == null) {
             return node;
@@ -127,7 +127,7 @@ public class LinkedList<T> {
         Node sortedList = merge(left, right);
         return sortedList;
     }
-    
+
     private Node getMiddle(Node node) {
         if (node == null) {
             return node;
@@ -360,8 +360,8 @@ public class LinkedList<T> {
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public LinkedList copyList() {
         LinkedList n = new LinkedList();
@@ -376,34 +376,53 @@ public class LinkedList<T> {
     }
 
     /**
-     * 
+     *
      * @param dni
      * @param aux
-     * @return 
+     * @param counter
+     * @return
      */
     public Reservation seachBina(T dni, LinkedList aux) {
         Node middle = getMiddle(aux.getHead());
         Reservation r = (Reservation) middle.getDato();
-        
-        if (r.getDni() < (int) dni) {
-            aux.setHead(middle);
-            return seachBina(dni, aux);
-        } 
-        
-        else if (r.getDni() > (int) dni) {
-            middle.setNext(null);
-            aux.setTail(middle);
-            return seachBina(dni, aux);
-        } 
-        
-        else if (r.getDni() == (int) dni) {
-            return (Reservation) middle.getDato();
-        } 
-        
-        else {
-            return null;
-        }
+        Reservation lastReserv = (Reservation) aux.tail.getDato();
+        Reservation firstReserv = (Reservation) aux.head.getDato();
 
+        // CONTROL ERROR
+        if ((int) dni > lastReserv.getDni()) {
+            System.out.println("[!] DNI INVÁLIDO");
+            return null;
+
+        } else if ((int) dni < firstReserv.getDni()) {
+            System.out.println("[!] DNI INVÁLIDO");
+            return null;
+
+        } else if ((int) dni == lastReserv.getDni()) {
+                return lastReserv;
+        } 
+
+        // Algorithm
+        else {
+            // Si el valor de la mitad de la lista es menor: Se corta desde el 
+            // valor tomado (Pasa a ser el último) 
+            if (r.getDni() < (int) dni) {
+                aux.setHead(middle);
+                return seachBina(dni, aux);
+
+                // Si el valor de la mayor de la lista es mayor: Se corta desde el 
+                // valor tomado (Pasa a ser el primero)
+            } else if (r.getDni() > (int) dni) {
+                middle.setNext(null);
+                aux.setTail(middle);
+                return seachBina(dni, aux);
+
+            } else if (r.getDni() == (int) dni) {
+                return (Reservation) middle.getDato();
+
+            } else {
+                return null;
+            }
+        }
     }
 
     /**
