@@ -1,4 +1,4 @@
-package User;
+package user;
 
 /**
  * The User class represents a user with basic attributes. It allows storing
