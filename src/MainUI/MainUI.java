@@ -141,23 +141,23 @@ public class MainUI extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Events">     
     private void searchReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReservationActionPerformed
-        app.searchReservation();
+//        app.searchReservation();
     }//GEN-LAST:event_searchReservationActionPerformed
 
     private void searchHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHistoryActionPerformed
-        app.searchBedroomHistorial();
+//        app.searchBedroomHistorial();
     }//GEN-LAST:event_searchHistoryActionPerformed
 
     private void checkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInActionPerformed
-        app.checkIn();
+//        app.checkIn();
     }//GEN-LAST:event_checkInActionPerformed
 
     private void checkOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutActionPerformed
-        app.checkOut();
+//        app.checkOut();
     }//GEN-LAST:event_checkOutActionPerformed
 
     private void searchClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientActionPerformed
-        app.searchHosted();
+//        app.searchHosted();
     }//GEN-LAST:event_searchClientActionPerformed
     // </editor-fold>     
     

@@ -74,7 +74,6 @@ public class HashTable<T> {
         if (list.isEmpty()) {
             return null;
         } else {
-            System.out.println("safklfakfak;lfkls;a");
             return (User) list.getDato(key, key2);
         }
 
