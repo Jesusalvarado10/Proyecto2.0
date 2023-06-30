@@ -79,6 +79,19 @@ public class App {
         while (true) {
             String name = JOptionPane.showInputDialog(null, "Ingerese su nombre:").replace(" ", "");
             String last_name = JOptionPane.showInputDialog(null, "Ingerese su apellido:").replace(" ", "");
+            try {
+                char i = (name.charAt(0));
+                String f = String.valueOf(i).toUpperCase();
+                name = name.replaceFirst(String.valueOf(i), f);
+                System.out.println(name);
+                char y = (last_name.charAt(0));
+                String e = String.valueOf(y).toUpperCase();
+                last_name = last_name.replaceFirst(String.valueOf(y), e);
+                System.out.println(last_name);
+
+            } catch (Exception e) {
+                System.out.println("smdsa");
+            }
             u = status.search(name, last_name);
             if (u != null) {
                 u.show();

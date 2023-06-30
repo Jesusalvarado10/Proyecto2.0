@@ -28,7 +28,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Daniel
  */
 public class ExcelManager {
-    
+
     public void leerExcel() {
         // ---------------------------------------------------------------------
         XSSFWorkbook libro = null;
@@ -49,7 +49,7 @@ public class ExcelManager {
             String nombreHoja = hoja.getSheetName();
             switch (nombreHoja) {
                 case "Reservas":
-                    
+
                     reservas = reservas(hoja);
                     reservas.sort();
 //                    Lista p = reservas.copyList();
@@ -58,7 +58,7 @@ public class ExcelManager {
 //                    d.show();
                     break;
                 case "Habitaciones":
-                    
+
                     habs = Habitaciones(hoja);
                     break;
 //
@@ -77,11 +77,13 @@ public class ExcelManager {
             }
         }
         App app = new App();
-//        app.searchBedroomHistorial(habs);
-//        app.searchReservation(reservas);
-        app.searchHosted(statusHabs);
+        //        app.searchBedroomHistorial(habs);
+        //        app.searchReservation(reservas);
+        //        app.searchHosted(statusHabs);
+        app.checkOut(habs, statusHabs);
+        
     }
-    
+
     public Lista reservas(XSSFSheet hoja) {
         Lista ord = new Lista();
         int n = 0;
@@ -97,20 +99,20 @@ public class ExcelManager {
                 Cell cell = row.getCell(cellIndex);
                 n++;
                 String[] posicion = new String[2];
-                
+
                 if (cell != null) {
-                    
+
                     if ("ci".equals(cell.getStringCellValue())) {
                         String p = String.valueOf(n);
                         posicion[1] = p;
                         posicion[0] = "ci";
-                        
+
                         ord.addLast(posicion);
                     } else if ("primer_nombre".equals(cell.getStringCellValue())) {
                         posicion[0] = "primer_nombre";
                         String p = String.valueOf(n);
                         posicion[1] = p;
-                        
+
                         ord.addLast(posicion);
                     } else if ("segundo_nombre".equals(cell.getStringCellValue())) {
                         posicion[0] = "segundo_nombre";
@@ -148,14 +150,14 @@ public class ExcelManager {
                         posicion[1] = p;
                         ord.addLast(posicion);
                     } else {
-                        
+
                     }
-                    
+
                 }
-                
+
             }
         }
-        
+
         Cell columna;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         //recorremos las filas
@@ -163,7 +165,7 @@ public class ExcelManager {
         // Índice de la segunda fila
 
         int rowIndexEnd = hoja.getLastRowNum();
-        
+
         for (int p = 1; p <= rowIndexEnd; p++) {
             row = hoja.getRow(p); // Obtiene la fila por índice
             n = 0;
@@ -190,7 +192,7 @@ public class ExcelManager {
 //                    Cogemos la siguiente fila
 
                     String[] orden = (String[]) ord.search2(n);
-                    
+
                     switch (orden[0]) {
                         case "ci":
                             double i = columna.getNumericCellValue();
@@ -204,7 +206,7 @@ public class ExcelManager {
                             name = columna.getStringCellValue();
 //                            System.out.println(columna.getStringCellValue());
                             break;
-                        
+
                         case "segundo_nombre":
                             last_name = columna.getStringCellValue();
 //                            System.out.println(columna.getStringCellValue());
@@ -236,7 +238,7 @@ public class ExcelManager {
                             departure = sdf.format(b);
 //                            System.out.println("Fecha: " + b);
                             break;
-                        
+
                     }
                     if (!"".equals(type) && !"".equals(ride) && !"".equals(departure) && !"".equals(last_name)
                             && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(phone) && dni != 0) {
@@ -246,13 +248,13 @@ public class ExcelManager {
                         Reservation r = new Reservation(u, type);
                         reservaciones.addLast(r);
                     }
-                    
+
                 }
             }
         }
         return reservaciones;
     }
-    
+
     public Bedroom[] Habitaciones(XSSFSheet hoja) {
         Lista ord = new Lista();
         int n = 0;
@@ -268,7 +270,7 @@ public class ExcelManager {
                 Cell cell = row.getCell(cellIndex);
                 n++;
                 String[] posicion = new String[2];
-                
+
                 if (cell != null) {
                     if ("num_hab".equals(cell.getStringCellValue())) {
                         posicion[0] = "num_hab";
@@ -286,11 +288,11 @@ public class ExcelManager {
                         posicion[1] = p;
                         ord.addLast(posicion);
                     } else {
-                        
+
                     }
-                    
+
                 }
-                
+
             }
         }
 
@@ -304,7 +306,7 @@ public class ExcelManager {
         // Índice de la segunda fila
 
         int rowIndexEnd = hoja.getLastRowNum();
-        
+
         for (int p = 1; p <= rowIndexEnd; p++) {
             row = hoja.getRow(p); // Obtiene la fila por índice
             n = 0;
@@ -324,7 +326,7 @@ public class ExcelManager {
                     //Cogemos la siguiente fila
 
                     String[] orden = (String[]) ord.search2(n);
-                    
+
                     switch (orden[0]) {
                         case "tipo_hab":
                             type = columna.getStringCellValue();
@@ -338,7 +340,7 @@ public class ExcelManager {
                             break;
                         default:
                             break;
-                        
+
                     }
                     //Segun el tipo de celda, usaremos uno u otra funcion
 ////                if (o != 0) {
@@ -359,26 +361,26 @@ public class ExcelManager {
                     if (!"".equals(type) && piso != 0) {
                         Bedroom b = new Bedroom(type, piso);
                         habitaciones.addLast(b);
-                        
+
                     }
-                    
+
                 }
-                
+
             }
-            
+
         }
         Bedroom habs[] = new Bedroom[(int) habitaciones.size()];
-        
+
         for (int i = 0; i < habitaciones.size(); i++) {
-            
+
             habs[i] = (Bedroom) habitaciones.getValuePosition(i);
 //            habs[i].show();
 //            System.out.println(i);
         }
         return habs;
-        
+
     }
-    
+
     public HashTable status(XSSFSheet hoja, Bedroom habs[]) {
         Lista ord = new Lista();
         int n = 0;
@@ -394,7 +396,7 @@ public class ExcelManager {
                 Cell cell = row.getCell(cellIndex);
                 n++;
                 String[] posicion = new String[2];
-                
+
                 if (cell != null) {
                     if ("num_hab".equals(cell.getStringCellValue())) {
                         posicion[0] = "num_hab";
@@ -422,7 +424,7 @@ public class ExcelManager {
                         posicion[1] = p;
                         ord.addLast(posicion);
                     } else if ("llegada".equals(cell.getStringCellValue())) {
-                        
+
                         posicion[0] = "llegada";
                         String p = String.valueOf(n);
                         posicion[1] = p;
@@ -433,7 +435,7 @@ public class ExcelManager {
                         posicion[1] = p;
                         ord.addLast(posicion);
                     } else {
-                        
+
                     }
                 }
             }
@@ -474,7 +476,7 @@ public class ExcelManager {
                             name = columna.getStringCellValue();
 //                            System.out.println(columna.getStringCellValue());
                             break;
-                        
+
                         case "apellido":
                             last_name = columna.getStringCellValue();
 //                            System.out.println(columna.getStringCellValue());
@@ -496,7 +498,7 @@ public class ExcelManager {
 //                            System.out.println("Fecha: " + a);
                             break;
                     }
-                    
+
                     if (!"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(phone) && num != 0 && !"".equals(ride)) {
                         User u = new User(name, last_name, gener, email, phone);
                         u.setRide(ride);
@@ -504,7 +506,7 @@ public class ExcelManager {
                         habs[num - 1].setOccupied(true);
                         b.insert(u);
                     }
-                    
+
                 }
 
 //                if (o != 0) {
@@ -552,7 +554,7 @@ public class ExcelManager {
         }
         return b;
     }
-    
+
     public void historico(XSSFSheet hoja, Bedroom habs[]) {
         Lista ord = new Lista();
         int n = 0;
@@ -568,7 +570,7 @@ public class ExcelManager {
                 Cell cell = row.getCell(cellIndex);
                 n++;
                 String[] posicion = new String[2];
-                
+
                 if (cell != null) {
                     if ("ci".equals(cell.getStringCellValue())) {
                         posicion[0] = "ci";
@@ -595,7 +597,7 @@ public class ExcelManager {
                         String p = String.valueOf(n);
                         posicion[1] = p;
                         ord.addLast(posicion);
-                        
+
                     } else if ("llegada".equals(cell.getStringCellValue())) {
                         posicion[0] = "llegada";
                         String p = String.valueOf(n);
@@ -607,23 +609,23 @@ public class ExcelManager {
                         posicion[1] = p;
                         ord.addLast(posicion);
                     } else {
-                        
+
                     }
-                    
+
                 }
-                
+
             }
         }
         Iterator<Row> filas = hoja.iterator();
         Iterator<Cell> columnas;
-        
+
         Row fila;
         Cell columna;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 //            recorremos las filas
         Lista reservaciones = new Lista();
         int rowIndexEnd = hoja.getLastRowNum();
-        
+
         for (int p = 1; p <= rowIndexEnd; p++) {
             row = hoja.getRow(p); // Obtiene la fila por índice
             int dni = 0;
@@ -638,7 +640,7 @@ public class ExcelManager {
             if (row != null) {
                 int cellIndexStart = row.getFirstCellNum(); // Índice de la primera celda
                 int cellIndexEnd = row.getLastCellNum();
-                
+
                 for (int cellIndex = cellIndexStart; cellIndex < cellIndexEnd; cellIndex++) {
                     columna = row.getCell(cellIndex); // Obtiene la celda por índice
 
@@ -660,7 +662,7 @@ public class ExcelManager {
                             name = columna.getStringCellValue();
                             //     System.out.println(name);
                             break;
-                        
+
                         case "apellido":
                             last_name = columna.getStringCellValue();
                             //      System.out.println(last_name);
@@ -683,9 +685,9 @@ public class ExcelManager {
                             num = (int) columna.getNumericCellValue();
                             //    System.out.println(num);
                             break;
-                        
+
                     }
-                    
+
                     if (dni != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && num != 0 && !"".equals(ride)) {
                         User u = new User(dni, name, last_name, gener, email, phone);
                         u.setRide(ride);
@@ -694,7 +696,7 @@ public class ExcelManager {
                         habs[num - 1].getTree().insert(habs[num - 1].getTree().getpRoot(), aux);
 //                        habs[num].getTree().preOrder(root.getpRoot());
                     }
-                    
+
                 }
 //                if (dni != 0 && num != 0 && !"".equals(last_name) && !"".equals(name) && !"".equals(gener) && !"".equals(email) && !"".equals(ride) && !"".equals(phone)) {
 //
@@ -708,7 +710,7 @@ public class ExcelManager {
 //        return reservaciones;
             }
         }
-        
+
     }
 }
 
