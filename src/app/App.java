@@ -123,7 +123,10 @@ public class App {
         user_aux = null;
         counter = 0;
         Reservation booking = (Reservation) reserv.seachBina(dni, d); // Se copia una lista porque despues de hacer la busqueda asi la lista se rompe
- 
+ if (booking==null){
+ System.out.println("[!] ERROR No tiene reserva, por lo tanto NO puede hacer Check-In");
+ return ;
+ }
 
 //        booking.show();
         // =====================================================================
@@ -151,7 +154,8 @@ public class App {
             status.insert(user_aux);
             System.out.println("[+] Su Check-In ha sido completado con éxito");
         } else {
-            System.out.println("[!] ERROR: No tiene reserva, por lo tanto NO puede hacer Check-In");
+            System.out.println("[!] No hay habitaciones disponibles "); //Si tiene reserva lo que sucede es que no hay habitaciones
+            
         }
     }
 
