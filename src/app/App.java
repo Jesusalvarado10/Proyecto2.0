@@ -172,6 +172,9 @@ public class App {
             Node aux = new Node(user_aux);
             habs[user_aux.getNum()].getTree().insert(habs[user_aux.getNum()].getTree().getpRoot(), aux);
         }
+        else{
+            System.out.println("[!] ERROR: No existe el usuario");
+        }
     }
 
     /**
