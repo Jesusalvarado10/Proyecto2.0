@@ -164,13 +164,14 @@ public class App {
         // Si el usuario existe, lo eliminas
         if (user_aux != null) {
             // Elimina...
-            user_aux.show();
             status.delete(nameTo, lastnameTo);
 
             // Elimina...
-            habs[user_aux.getNum()].setOccupied(false);
+            int index=user_aux.getNum();
+            habs[index].setOccupied(false);
             Node aux = new Node(user_aux);
-            habs[user_aux.getNum()].getTree().insert(habs[user_aux.getNum()].getTree().getpRoot(), aux);
+            
+            habs[index].getTree().insert(habs[index].getTree().getpRoot(), aux);
         }
         else{
             System.out.println("[!] ERROR: No existe el usuario");

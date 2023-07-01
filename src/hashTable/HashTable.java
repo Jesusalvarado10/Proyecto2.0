@@ -97,7 +97,8 @@ public class HashTable<T> {
      */
     public void delete(String key, String key2) {
         int index = hashFunction(key, key2);
-        table[index] = null;
+        table[index].deleteLast(key, key2);
+        table[index].show();
     }
     // </editor-fold> 
 

@@ -223,6 +223,28 @@ public class LinkedList<T> {
         }
     }
 
+    public void deleteLast(String name, String last_name) {
+
+        if (!isEmpty()) {
+            Node pivot = getHead();
+            User r = (User) pivot.getDato();
+            if (r.getName() == name && r.getLast_name() == last_name) {
+                setHead(null);
+            } else {
+                while (pivot.getNext() != null) {
+                    r = (User) pivot.getNext().getDato();
+                    if (r.getName() == name && r.getLast_name() == last_name) {
+                        pivot.setNext(pivot.getNext().getNext());
+                    }
+                    pivot = pivot.getNext();
+                }
+            }
+
+        } else {
+            // JOptionPane.showMessageDialog(null, "La lista esta vacia");
+        }
+    }
+
     public void deleteLast() {
 
         if (!isEmpty()) {
@@ -268,7 +290,7 @@ public class LinkedList<T> {
     public void show() {
         Node aux = head;
         while (aux != null) {
-            Reservation r = (Reservation) aux.getDato();
+            User r = (User) aux.getDato();
             r.show();
             aux = aux.next;
         }
@@ -398,10 +420,8 @@ public class LinkedList<T> {
             return null;
 
         } else if ((int) dni == lastReserv.getDni()) {
-                return lastReserv;
-        } 
-
-        // Algorithm
+            return lastReserv;
+        } // Algorithm
         else {
             // Si el valor de la mitad de la lista es menor: Se corta desde el 
             // valor tomado (Pasa a ser el último) 
