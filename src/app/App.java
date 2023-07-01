@@ -61,6 +61,9 @@ public class App {
     public void start() {
         this.excel();
         this.checkOut("Karilynn", "Gant");
+        this.checkIn(13942957);
+        this.checkIn(12992876);
+//        this.checkIn(13942957);
         // this.gui();
     }
 
@@ -114,15 +117,20 @@ public class App {
         // =====================================================================
         User user_aux;
         int counter;
+        LinkedList d=reserv.copyList();
         // =====================================================================
         // Buscar según el DNI, la reservación
         user_aux = null;
         counter = 0;
-        Reservation booking = (Reservation) reserv.seachBina(dni, reserv);
+        Reservation booking = (Reservation) reserv.seachBina(dni, d); // Se copia una lista porque despues de hacer la busqueda asi la lista se rompe
+ 
+
+//        booking.show();
         // =====================================================================
         // Buscar habitación con la reservación, verificar si está disponible la habitación
         for (Bedroom aux : habs) {
             counter++;
+//            System.out.println("SAKDFL");
 
             // Condición: Si no está ocupado
             if (!aux.isOccupied()) {
@@ -130,9 +138,10 @@ public class App {
 
                 // Condición: Si es el mismo tipo que la reservada
                 if (aux.getType().equals(booking.getType())) {
+                    reserv.deleteReserv(booking); //Se elimina el valor de las reservas ya que no puede permanecer ahi 
                     user_aux = booking.getUser();
                     aux.setOccupied(true);
-                    user_aux.setNum(counter);
+                    user_aux.setNum(counter);  
                     break;
                 }
             }
@@ -160,6 +169,7 @@ public class App {
         // =====================================================================
         // Buscar usuario
         user_aux = status.search(nameTo, lastnameTo);
+        
         // =====================================================================
         // Si el usuario existe, lo eliminas
         if (user_aux != null) {
@@ -169,6 +179,7 @@ public class App {
             // Elimina...
             int index=user_aux.getNum();
             habs[index].setOccupied(false);
+            // input dni y si no esta en el arbol  (con alguno de los recorridos) a;adirlo porque los usuarios que provienen de las habitaciones (Estados) no tiene cedula 
             Node aux = new Node(user_aux);
             
             habs[index].getTree().insert(habs[index].getTree().getpRoot(), aux);

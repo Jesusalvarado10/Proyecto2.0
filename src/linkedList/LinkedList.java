@@ -223,10 +223,38 @@ public class LinkedList<T> {
         }
     }
 
-    public void deleteLast(String name, String last_name) {
+    public void deleteReserv(Reservation d) {
 
         if (!isEmpty()) {
+
             Node pivot = getHead();
+
+            Reservation r = (Reservation) pivot.getDato();
+            if (r == d) {
+                System.out.println(" True");
+                setHead(null);
+            } else {
+                while (pivot.getNext() != null) {
+                    r = (Reservation) pivot.getNext().getDato();
+                    if (r == d) {
+                        System.out.println(" True");
+                        pivot.setNext(pivot.getNext().getNext());
+                    }
+                    pivot = pivot.getNext();
+                }
+            }
+
+        } else {
+            // JOptionPane.showMessageDialog(null, "La lista esta vacia");
+        }
+    }
+
+    public void deleteUser(String name, String last_name) {
+
+        if (!isEmpty()) {
+
+            Node pivot = getHead();
+
             User r = (User) pivot.getDato();
             if (r.getName() == name && r.getLast_name() == last_name) {
                 setHead(null);
@@ -397,6 +425,14 @@ public class LinkedList<T> {
 
     }
 
+    public Node before(Node t) {
+        Node aux = head;
+        while (aux.getNext() != t) {
+            aux = aux.getNext();
+        }
+        return aux;
+    }
+
     /**
      *
      * @param dni
@@ -409,39 +445,52 @@ public class LinkedList<T> {
         Reservation r = (Reservation) middle.getDato();
         Reservation lastReserv = (Reservation) aux.tail.getDato();
         Reservation firstReserv = (Reservation) aux.head.getDato();
+        System.out.println("Valor :" + dni);
+        System.out.println("Ultimo :" + lastReserv.getDni());
+        System.out.println("Medio :" + r.getDni());
+        System.out.println("Primero :" + firstReserv.getDni());
 
         // CONTROL ERROR
-        if ((int) dni > lastReserv.getDni()) {
-            System.out.println("[!] DNI INVÁLIDO");
+//        if ((int) dni > lastReserv.getDni()) {
+//            System.out.println("[!] DNI INVÁLIDO");
+//            return null;
+//
+//        } else if ((int) dni < firstReserv.getDni()) {
+//            System.out.println("[!] DNI INVÁLIDO");
+//            return null;
+//
+//        } else if ((int) dni == lastReserv.getDni()) {
+//            return lastReserv;
+//        } // Algorithm
+//        else {
+        // Si el valor de la mitad de la lista es menor: Se corta desde el 
+        // valor tomado (Pasa a ser el último) 
+        if (middle == aux.getHead() && aux.getTail() == middle && r.getDni() != (int) dni) {
             return null;
 
-        } else if ((int) dni < firstReserv.getDni()) {
-            System.out.println("[!] DNI INVÁLIDO");
+        }
+        if (r.getDni() < (int) dni) {
+//            System.out.println("Mayor");
+
+            aux.setHead(middle.getNext());
+            return seachBina(dni, aux);
+
+            // Si el valor de la mayor de la lista es mayor: Se corta desde el 
+            // valor tomado (Pasa a ser el primero)
+        } else if (r.getDni() > (int) dni) {
+//            System.out.println("Menor");
+
+            aux.setTail(aux.before(middle));
+            aux.getTail().setNext(null);
+//            r=(Reservation)aux.getTail().getDato();
+//            System.out.println("Despues " +r.getDni());
+            return seachBina(dni, aux);
+
+        } else if (r.getDni() == (int) dni) {
+            return (Reservation) middle.getDato();
+
+        } else {
             return null;
-
-        } else if ((int) dni == lastReserv.getDni()) {
-            return lastReserv;
-        } // Algorithm
-        else {
-            // Si el valor de la mitad de la lista es menor: Se corta desde el 
-            // valor tomado (Pasa a ser el último) 
-            if (r.getDni() < (int) dni) {
-                aux.setHead(middle);
-                return seachBina(dni, aux);
-
-                // Si el valor de la mayor de la lista es mayor: Se corta desde el 
-                // valor tomado (Pasa a ser el primero)
-            } else if (r.getDni() > (int) dni) {
-                middle.setNext(null);
-                aux.setTail(middle);
-                return seachBina(dni, aux);
-
-            } else if (r.getDni() == (int) dni) {
-                return (Reservation) middle.getDato();
-
-            } else {
-                return null;
-            }
         }
     }
 
@@ -450,28 +499,27 @@ public class LinkedList<T> {
      *
      * @param data Tipo de dato (User, reservation, bedroom, etc)
      */
-    public void delete(T data) {
-        Node aux = head;
-        Node prev = null;
-        String x;
-        while (aux != null) {
-            if (prev == null) {
-                if (aux.getDato() == data) {
-                    head = null;
-                    break;
-                }
-            } else {
-                if (aux.getDato() == data) {
-                    prev.setNext(aux.getNext());
-                    aux.setNext(null);
-                    break;
-                }
-            }
-            prev = aux;
-            aux = prev.getNext();
-        }
-    }
-
+//    public void delete(T data) {
+//        Node aux = head;
+//        Node prev = null;
+//        String x;
+//        while (aux != null) {
+//            if (prev == null) {
+//                if (aux.getDato() == data) {
+//                    head = null;
+//                    break;
+//                }
+//            } else {
+//                if (aux.getDato() == data) {
+//                    prev.setNext(aux.getNext());
+//                    aux.setNext(null);
+//                    break;
+//                }
+//            }
+//            prev = aux;
+//            aux = prev.getNext();
+//        }
+//    }
     /**
      * ?????
      *
