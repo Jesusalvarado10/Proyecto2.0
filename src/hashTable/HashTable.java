@@ -39,7 +39,7 @@ public class HashTable<T> {
 
     }
     // </editor-fold> 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Table">  
     /**
      *
@@ -57,7 +57,7 @@ public class HashTable<T> {
         this.table = table;
     }
     // </editor-fold> 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Size"> 
     /**
      *
@@ -75,7 +75,7 @@ public class HashTable<T> {
         this.size = size;
     }
     // </editor-fold> 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Insert">   
     /**
      *
@@ -88,7 +88,7 @@ public class HashTable<T> {
         list.addLast((User) u);
     }
     // </editor-fold> 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Delete">   
     /**
      *
@@ -100,7 +100,7 @@ public class HashTable<T> {
         table[index] = null;
     }
     // </editor-fold> 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Search">   
     /**
      *
@@ -118,7 +118,7 @@ public class HashTable<T> {
         }
     }
     // </editor-fold> 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Show">   
     /**
      *

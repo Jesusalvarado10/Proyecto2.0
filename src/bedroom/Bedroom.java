@@ -43,7 +43,7 @@ public class Bedroom {
 
     /**
      *
-     * @return 
+     * @return
      */
     public Tree getTree() {
         return tree;
@@ -59,7 +59,7 @@ public class Bedroom {
 
     /**
      *
-     * @return 
+     * @return
      */
     public boolean isOccupied() {
         return occupied;
@@ -75,7 +75,7 @@ public class Bedroom {
 
     /**
      *
-     * @return 
+     * @return
      */
     public String getType() {
         return type;
@@ -91,7 +91,7 @@ public class Bedroom {
 
     /**
      *
-     * @return 
+     * @return
      */
     public int getFloor() {
         return floor;
