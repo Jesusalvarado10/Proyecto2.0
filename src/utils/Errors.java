@@ -23,7 +23,7 @@ public class Errors {
     }
     
     public static void hostedNotFounded(){
-        String msg = "ERROR: El cliente no se encuntra!";
+        String msg = "ERROR: El cliente no se encuentra!";
         message(msg);
     }
     

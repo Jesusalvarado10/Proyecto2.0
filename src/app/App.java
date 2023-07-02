@@ -11,6 +11,7 @@ import binaryTree.Node;
 import excelManager.ExcelManager;
 import gui.MainGUI;
 import gui.ShowClientGUI;
+import gui.ShowHostedGUI;
 import hashTable.HashTable;
 import java.io.File;
 import javax.swing.UIManager;
@@ -204,21 +205,18 @@ public class App {
      */
     public void searchHosted() {
         try{
-            String[] info = Utils.requestBasicInformation();
-            String name = info[0];
-            String lastname = info[1];
-            User aux = (User) status.search(name, lastname);
+            String name = Utils.requestName();
+            String lastname = Utils.requestLastame();
+            User user_aux = (User) status.search(name, lastname);
 
-            if (aux != null){
-                aux.show();
-                System.out.println(aux.getNum());
+            if (user_aux != null){
+                ShowHostedGUI show = new ShowHostedGUI(user_aux);
             }
             else {
                 Errors.hostedNotFounded();
             }
             
         } catch (Exception e){
-            System.out.println(e);
             Errors.undefinedError();
         }
     }

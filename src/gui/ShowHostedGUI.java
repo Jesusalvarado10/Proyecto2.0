@@ -12,7 +12,7 @@ import user.User;
  *
  * @author Daniel
  */
-public class ShowClientGUI extends javax.swing.JFrame {
+public class ShowHostedGUI extends javax.swing.JFrame {
 
     static User client;
     static String title = "Showing information";
@@ -22,7 +22,7 @@ public class ShowClientGUI extends javax.swing.JFrame {
      * Creates new form ShowClientGUI
      * @param aux
      */
-    public ShowClientGUI(User aux) {
+    public ShowHostedGUI(User aux) {
         // Ignore
         initComponents();
         
@@ -70,7 +70,7 @@ public class ShowClientGUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 169, 165));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INFORMACIÓN DE LA RESERVACIÓN");
+        jLabel1.setText("INFORMACIÓN DE LA HABITACIÓN");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 250, 30));
 
         numLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -120,12 +120,12 @@ public class ShowClientGUI extends javax.swing.JFrame {
 
         dni.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         dni.setForeground(new java.awt.Color(78, 128, 152));
-        dni.setText("DEFAULT");
+        dni.setText("PRIVADO");
         jPanel1.add(dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
         departure.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         departure.setForeground(new java.awt.Color(78, 128, 152));
-        departure.setText("DEFAULT");
+        departure.setText("PRIVADO");
         jPanel1.add(departure, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, -1, -1));
 
         ride.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -159,13 +159,11 @@ public class ShowClientGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void update(){
-        dni.setText(String.valueOf(client.getDni()));
         name.setText(client.getName());
         lastname.setText(client.getLast_name());
         email.setText(client.getEmail());
         phone.setText(client.getPhone());
         ride.setText(client.getRide());
-        departure.setText(client.getDeparture());
         num.setText(String.valueOf(client.getNum()));
     }
     
@@ -187,19 +185,20 @@ public class ShowClientGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ShowClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowHostedGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ShowClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowHostedGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ShowClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowHostedGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ShowClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowHostedGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new ShowClientGUI(client).setVisible(true);
+            new ShowHostedGUI(client).setVisible(true);
         });
     }
     // </editor-fold>
