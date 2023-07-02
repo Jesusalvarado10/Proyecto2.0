@@ -78,10 +78,10 @@ public class App {
             LinkedList d = reserv.copyList();
             Reservation booking = (Reservation) reserv.seachBina(dni, d);
             // =================================================================
-            if (booking != null){
+            if (booking != null) {
                 User user_aux = booking.getUser();
                 ShowClientGUI show = new ShowClientGUI(user_aux);
-                
+
             } else {
                 Errors.reservationNotFounded();
             }
@@ -96,16 +96,17 @@ public class App {
      * @param numBed
      */
     public void searchBedroomHistorial() {
-        // NOTA: La búsqueda de historial se hacen en xlsx.habs
-        // =====================================================================
-        // User data introducing. Ex: 3100, 256, 300, 1
-        int numBedroom = Integer.parseInt(JOptionPane.showInputDialog("Numero de la habitacion").replace(" ", ""));
-        // =====================================================================
-        // Control error
-        if (numBedroom <= habs.length && numBedroom > 0) {
-            habs[numBedroom - 1].getTree().inOrder(habs[numBedroom - 1].getTree().getpRoot());
-        } else {
-            System.out.println("[!] ERROR: La habitación introducida no es válida");
+        try {
+            int numBedroom = Utils.requestNumBedroom();
+            if (numBedroom <= habs.length && numBedroom > 0) {
+                habs[numBedroom - 1].getTree().showHistorial(habs[numBedroom - 1].getTree().getpRoot());
+
+            } else {
+                Errors.outOfLenghtBedrooms();
+            }
+
+        } catch (Exception e) {
+            Errors.invalidInput();
         }
     }
 
@@ -169,31 +170,49 @@ public class App {
     public void checkOut() {
         // NOTE: Para hacer Check-Out necesitamos el (nombre) y el (apellido)
         // =====================================================================
-        String name = JOptionPane.showInputDialog("Nombre");
-        String lastname = JOptionPane.showInputDialog("Apellido");
-        User user_aux;
-        // =====================================================================
-        // Buscar usuario
-        user_aux = status.search(name, lastname);
-        // =====================================================================
-        // Si el usuario existe, lo eliminas
-        if (user_aux != null) {
-            // Elimina...
-            status.delete(name, lastname);
+        try {
+            String name = Utils.requestName();
+            String lastname = Utils.requestLastame();
+            // =================================================================
+            User user_aux;
+            // =================================================================
+            // Buscar usuario
+            user_aux = status.search(name, lastname);
+            // =====================================================================
+            // Si el usuario existe, lo eliminas
+            if (user_aux != null) {
+                if (user_aux.getDni() == 0) {
+                    try {
+                        int dni = Utils.requestDNI();
+                        user_aux.setDni(dni);
 
-            // Elimina...
-            int index = user_aux.getNum() - 1;
-            habs[index].setOccupied(false);
-            if (user_aux.getDni() == 0) {
-                int dni = Integer.parseInt(JOptionPane.showInputDialog("Cedula").replace(" ", ""));
-                user_aux.setDni(dni);
+                        // Elimina...
+                        status.delete(name, lastname);
+
+                        // Elimina...
+                        int index = user_aux.getNum() - 1;
+                        habs[index].setOccupied(false);
+
+                        // input dni y si no esta en el arbol  (con alguno de los recorridos) a;adirlo porque los usuarios que provienen de las habitaciones (Estados) no tiene cedula 
+                        Node aux = new Node(user_aux);
+                        habs[index].getTree().insert(habs[index].getTree().getpRoot(), aux);
+                        habs[index].getTree().inOrder(habs[index].getTree().getpRoot());
+
+                        // Information
+                        Utils.info("Su Check-Out ha sido realizado correctamente!");
+
+                    } catch (Exception e) {
+                        Errors.invalidInput();
+                    }
+
+                }
+
+            } else {
+                Errors.clientNotFounded();
             }
-            // input dni y si no esta en el arbol  (con alguno de los recorridos) a;adirlo porque los usuarios que provienen de las habitaciones (Estados) no tiene cedula 
-            Node aux = new Node(user_aux);
-            habs[index].getTree().insert(habs[index].getTree().getpRoot(), aux);
-            habs[index].getTree().inOrder(habs[index].getTree().getpRoot());
-        } else {
-            System.out.println("[!] ERROR: No existe el usuario");
+
+        } catch (Exception e) {
+            Errors.invalidInput();
         }
     }
 
@@ -204,19 +223,18 @@ public class App {
      * @param lastname
      */
     public void searchHosted() {
-        try{
+        try {
             String name = Utils.requestName();
             String lastname = Utils.requestLastame();
             User user_aux = (User) status.search(name, lastname);
 
-            if (user_aux != null){
+            if (user_aux != null) {
                 ShowHostedGUI show = new ShowHostedGUI(user_aux);
-            }
-            else {
+            } else {
                 Errors.hostedNotFounded();
             }
-            
-        } catch (Exception e){
+
+        } catch (Exception e) {
             Errors.undefinedError();
         }
     }

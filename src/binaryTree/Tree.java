@@ -5,6 +5,8 @@
  */
 package binaryTree;
 
+import gui.ShowHistorialGUI;
+import gui.ShowHostedGUI;
 import user.User;
 
 /**
@@ -27,7 +29,7 @@ public class Tree {
 
     /**
      *
-     * @return 
+     * @return
      */
     public Node getpRoot() {
         return pRoot;
@@ -75,7 +77,7 @@ public class Tree {
      *
      * @param aux
      * @param data
-     * @return 
+     * @return
      */
     public Node search(Node aux, int data) {
         if (aux == null) {
@@ -100,8 +102,23 @@ public class Tree {
         if (root != null) {
             inOrder(root.getLeft());
             User u = (User) root.getDato();
-            u.show();
             inOrder(root.getRight());
+        }
+    }
+
+    /**
+     *
+     * @param root
+     */
+    public void showHistorial(Node root) {
+        if (root != null) {
+            showHistorial(root.getLeft());
+            User u = (User) root.getDato();
+            // =================================================================
+            User user_aux = u;
+            ShowHistorialGUI gui = new ShowHistorialGUI(user_aux);
+            // =================================================================
+            showHistorial(root.getRight());
         }
     }
 

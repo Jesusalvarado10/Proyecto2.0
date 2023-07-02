@@ -33,7 +33,7 @@ public class Utils {
     public static String requestName() {
         String name;
         // =====================================================================
-        name = JOptionPane.showInputDialog("Nombre por favor");
+        name = JOptionPane.showInputDialog("Nombre por favor").trim();
         // =====================================================================
         return name;
     }
@@ -45,20 +45,27 @@ public class Utils {
     public static String requestLastame() {
         String name;
         // =====================================================================
-        name = JOptionPane.showInputDialog("Apellido por favor");
+        name = JOptionPane.showInputDialog("Apellido por favor").trim();
         // =====================================================================
         return name;
     }
 
     /**
      *
-     * @return 
+     * @return
      */
     public static int requestNumBedroom() {
-        int bedroom = -1;
+        int bedroom;
         // =====================================================================
-
+        bedroom = Integer.parseInt(JOptionPane.showInputDialog("Número de habitación por favor (Solo números)"));
         // =====================================================================
         return bedroom;
+    }
+    
+    /**
+     * 
+     */
+    public static void info(String msg){
+        JOptionPane.showMessageDialog(null, msg);
     }
 }
