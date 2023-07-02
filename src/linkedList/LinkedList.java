@@ -231,13 +231,11 @@ public class LinkedList<T> {
 
             Reservation r = (Reservation) pivot.getDato();
             if (r == d) {
-                System.out.println(" True");
                 setHead(null);
             } else {
                 while (pivot.getNext() != null) {
                     r = (Reservation) pivot.getNext().getDato();
                     if (r == d) {
-                        System.out.println(" True");
                         pivot.setNext(pivot.getNext().getNext());
                         return;
                     }
@@ -259,9 +257,7 @@ public class LinkedList<T> {
 
             User r = (User) pivot.getDato();
             r.show();
-            System.out.println(name + "      " + last_name);
             if (r.getName().toLowerCase().equals(name) && r.getLast_name().toLowerCase().equals(last_name)) {
-                System.out.println("ENTRO");
                 setHead(null);
             } else {
                 while (pivot.getNext() != null) {
@@ -345,14 +341,11 @@ public class LinkedList<T> {
      */
     public T getDato(String data, String data2) {
         // Es para obtener el valor del nodo que buscamos, despues de usar el search, igualmente se usa parametos especificos para el tipo de dato.
-        data=data.toLowerCase();
-        data2=data2.toLowerCase();
+        data = data.toLowerCase();
+        data2 = data2.toLowerCase();
         Node aux = head;
         while (aux != null) {
             User u = (User) aux.getDato();
-            u.show();
-            System.out.println(data);
-            System.out.println(data2);
             if (u.getName().toLowerCase().equals(data) && u.getLast_name().toLowerCase().equals(data2)) {
                 return (T) aux.getDato();
             }
@@ -457,81 +450,24 @@ public class LinkedList<T> {
         Reservation r = (Reservation) middle.getDato();
         Reservation lastReserv = (Reservation) aux.tail.getDato();
         Reservation firstReserv = (Reservation) aux.head.getDato();
-        System.out.println("Valor :" + dni);
-        System.out.println("Ultimo :" + lastReserv.getDni());
-        System.out.println("Medio :" + r.getDni());
-        System.out.println("Primero :" + firstReserv.getDni());
 
-        // CONTROL ERROR
-//        if ((int) dni > lastReserv.getDni()) {
-//            System.out.println("[!] DNI INVÁLIDO");
-//            return null;
-//
-//        } else if ((int) dni < firstReserv.getDni()) {
-//            System.out.println("[!] DNI INVÁLIDO");
-//            return null;
-//
-//        } else if ((int) dni == lastReserv.getDni()) {
-//            return lastReserv;
-//        } // Algorithm
-//        else {
-        // Si el valor de la mitad de la lista es menor: Se corta desde el 
-        // valor tomado (Pasa a ser el último) 
         if (middle == aux.getHead() && aux.getTail() == middle && r.getDni() != (int) dni) {
             return null;
-
         }
         if (r.getDni() < (int) dni) {
-//            System.out.println("Mayor");
-
             aux.setHead(middle.getNext());
             return seachBina(dni, aux);
-
-            // Si el valor de la mayor de la lista es mayor: Se corta desde el 
-            // valor tomado (Pasa a ser el primero)
         } else if (r.getDni() > (int) dni) {
-//            System.out.println("Menor");
-
             aux.setTail(aux.before(middle));
             aux.getTail().setNext(null);
-//            r=(Reservation)aux.getTail().getDato();
-//            System.out.println("Despues " +r.getDni());
             return seachBina(dni, aux);
-
         } else if (r.getDni() == (int) dni) {
             return (Reservation) middle.getDato();
-
         } else {
             return null;
         }
     }
 
-    /**
-     * Elimina el nodo de la lista
-     *
-     * @param data Tipo de dato (User, reservation, bedroom, etc)
-     */
-//    public void delete(T data) {
-//        Node aux = head;
-//        Node prev = null;
-//        String x;
-//        while (aux != null) {
-//            if (prev == null) {
-//                if (aux.getDato() == data) {
-//                    head = null;
-//                    break;
-//                }
-//            } else {
-//                if (aux.getDato() == data) {
-//                    prev.setNext(aux.getNext());
-//                    aux.setNext(null);
-//                    break;
-//                }
-//            }
-//            prev = aux;
-//            aux = prev.getNext();
-//        }
-//    }
     /**
      * ?????
      *

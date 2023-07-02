@@ -10,11 +10,16 @@ import bedroom.Bedroom;
 import binaryTree.Node;
 import excelManager.ExcelManager;
 import gui.MainGUI;
+import gui.ShowClientGUI;
 import hashTable.HashTable;
 import java.io.File;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import linkedList.LinkedList;
 import reservation.Reservation;
 import user.User;
+import utils.Errors;
+import utils.Utils;
 
 // <editor-fold defaultstate="collapsed" desc="============">   
 // </editor-fold> 
@@ -24,13 +29,6 @@ import user.User;
  */
 public class App {
 
-    // 1. Excel class
-    // 2. Open GUI
-    /*
-        2.1. Reservas: xlsx.reservas
-        2.2. Habitaciones: xlsx.habs
-        2.3. Estado: xlsx.statusHabs
-     */
     /**
      *
      */
@@ -61,26 +59,8 @@ public class App {
      */
     public void start() {
         this.excel();
-        while (true) {
-            String opcion = JOptionPane.showInputDialog("1.Buscar reservacion \n2.Historial de la habitacion \n3.Check in \n4.Check out\n5.Mostar datos por habitacion");
-            if ("1".equals(opcion)) {
-                this.searchReservation();
-            } else if ( "2".equals(opcion)) {
-                this.searchBedroomHistorial();
-            } else if ("3".equals(opcion)) {
-               this.checkIn();
-            } else if ("4".equals(opcion)) {
-                 this.checkOut();
-            } else if ("5".equals(opcion)) {
-                this.searchHosted();
-            } else {
-                
-            }
-
-          
-        }
-//        this.checkIn(13942957);
-        // this.gui();
+        this.updateFormatRequest();
+        this.gui();
     }
 
     // <editor-fold defaultstate="collapsed" desc="UI Functions">   
@@ -88,21 +68,24 @@ public class App {
      * READY
      *
      * @param numDni
-     *///Meade | Abramchik | Female | mabramchik3e@opensource.org | (398) 6399581
-//Indice238
+     */
     public void searchReservation() {
         // NOTA: La búsqueda de reservaciones se hacen en xlsx.reservas
-        // =====================================================================
-        // User data introducing: 10_000_000, 19_998_198, 14_223_456
-        LinkedList d = reserv.copyList();
-        int dni = Integer.parseInt(JOptionPane.showInputDialog("Cedula").replace(" ", ""));
-        Reservation booking = (Reservation) reserv.seachBina(dni, d);
-        // =====================================================================
-        // Verification
-        if (booking != null) {
-            booking.show();
-        } else {
-            System.out.println("[!] ERROR: La reservación no existe!");
+        try {
+            int dni = Utils.requestDNI();
+            // =================================================================
+            LinkedList d = reserv.copyList();
+            Reservation booking = (Reservation) reserv.seachBina(dni, d);
+            // =================================================================
+            if (booking != null){
+                User user_aux = booking.getUser();
+                ShowClientGUI show = new ShowClientGUI(user_aux);
+                
+            } else {
+                Errors.reservationNotFounded();
+            }
+        } catch (Exception e) {
+            Errors.invalidInput();
         }
     }
 
@@ -147,22 +130,20 @@ public class App {
             return;
         }
 
-//        booking.show();
         // =====================================================================
         // Buscar habitación con la reservación, verificar si está disponible la habitación
         for (Bedroom aux : habs) {
             counter++;
-//            System.out.println("SAKDFL");
 
             // Condición: Si no está ocupado
             if (!aux.isOccupied()) {
-                System.out.println("NO ESTÁ OCUPADA!!! ");
+                System.out.println("[I] NO ESTÁ OCUPADA!!! ");
 
                 // Condición: Si es el mismo tipo que la reservada
                 if (aux.getType().equals(booking.getType())) {
                     reserv.deleteReserv(booking); //Se elimina el valor de las reservas ya que no puede permanecer ahi 
                     user_aux = booking.getUser();
-                    
+
                     aux.setOccupied(true);
                     user_aux.setNum(counter);
                     break;
@@ -171,7 +152,6 @@ public class App {
         }
         // =====================================================================
         if (user_aux != null) {
-            user_aux.show();
             status.insert(user_aux);
             System.out.println("[+] Su Check-In ha sido completado con éxito");
         } else {
@@ -194,20 +174,19 @@ public class App {
         // =====================================================================
         // Buscar usuario
         user_aux = status.search(name, lastname);
-
         // =====================================================================
         // Si el usuario existe, lo eliminas
         if (user_aux != null) {
             // Elimina...
-            //elimina
             status.delete(name, lastname);
 
             // Elimina...
-            int index = user_aux.getNum()-1;
+            int index = user_aux.getNum() - 1;
             habs[index].setOccupied(false);
-            if (user_aux.getDni()==0){
-                int dni=Integer.parseInt(JOptionPane.showInputDialog("Cedula").replace(" ", ""));
-            user_aux.setDni(dni);}
+            if (user_aux.getDni() == 0) {
+                int dni = Integer.parseInt(JOptionPane.showInputDialog("Cedula").replace(" ", ""));
+                user_aux.setDni(dni);
+            }
             // input dni y si no esta en el arbol  (con alguno de los recorridos) a;adirlo porque los usuarios que provienen de las habitaciones (Estados) no tiene cedula 
             Node aux = new Node(user_aux);
             habs[index].getTree().insert(habs[index].getTree().getpRoot(), aux);
@@ -224,20 +203,23 @@ public class App {
      * @param lastname
      */
     public void searchHosted() {
-        // NOTA: La búsqueda de habitaciones hospedadas se hacen en xlsx.statusHabs
-        HashTable hash = this.xlsx.statusHabs;
-        // =====================================================================
-        String name = JOptionPane.showInputDialog("Nombre");
-        String lastname = JOptionPane.showInputDialog("Apellido");
-   
-        // =====================================================================
-        User aux = (User) hash.search(name, lastname);
-        // =====================================================================
-        if (aux != null) {
-            aux.show();
-            System.out.println(aux.getNum());
-        } else {
-            System.out.println("[!] ERROR: El cliente no se encuentra");
+        try{
+            String[] info = Utils.requestBasicInformation();
+            String name = info[0];
+            String lastname = info[1];
+            User aux = (User) status.search(name, lastname);
+
+            if (aux != null){
+                aux.show();
+                System.out.println(aux.getNum());
+            }
+            else {
+                Errors.hostedNotFounded();
+            }
+            
+        } catch (Exception e){
+            System.out.println(e);
+            Errors.undefinedError();
         }
     }
     // </editor-fold> 
@@ -259,7 +241,14 @@ public class App {
      *
      */
     private void gui() {
-        MainGUI gui = new MainGUI(this.title);
+        MainGUI gui = new MainGUI(this.title, this);
+    }
+
+    private void updateFormatRequest() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+        }
     }
     // </editor-fold> 
 }

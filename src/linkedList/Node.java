@@ -12,16 +12,16 @@ package linkedList;
 public class Node<T> {
 
     /**
-     * 
+     *
      */
     T dato;
     /**
-     * 
+     *
      */
     Node next;
 
     /**
-     * 
+     *
      * @param dato
      */
     public Node(T dato) {
@@ -30,15 +30,15 @@ public class Node<T> {
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public T getDato() {
         return dato;
     }
 
     /**
-     * 
+     *
      * @param dato
      */
     public void setDato(T dato) {
@@ -46,15 +46,15 @@ public class Node<T> {
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public Node getNext() {
         return next;
     }
 
     /**
-     * 
+     *
      * @param next
      */
     public void setNext(Node next) {

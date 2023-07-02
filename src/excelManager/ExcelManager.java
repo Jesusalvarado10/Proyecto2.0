@@ -496,7 +496,6 @@ public class ExcelManager {
                 }
             }
         }
-
         return b;
     }
 
@@ -610,6 +609,7 @@ public class ExcelManager {
                             value = value.replace(".", "");
                             value = value.replace("E7", "");
                             dni = Integer.parseInt(value);
+
                             break;
                         case "primer_nombre":
                             name = columna.getStringCellValue();

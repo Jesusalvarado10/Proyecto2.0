@@ -5,6 +5,8 @@
  */
 package gui;
 
+import app.App;
+
 /**
  *
  * @author Daniel
@@ -12,14 +14,16 @@ package gui;
 public class MainGUI extends javax.swing.JFrame {
 
     static String t;
-
+    static App app;
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Constructor">   
     /**
      * Creates new form MainGUI
      *
      * @param title
      */
-    public MainGUI(String title) {
+    public MainGUI(String title, App appParam) {
         // Ignore
         initComponents();
 
@@ -27,31 +31,124 @@ public class MainGUI extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
+        this.setResizable(false);
 
         // Utilities
-        // ...
+        app = appParam;
     }
     // </editor-fold> 
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        checkOut = new javax.swing.JButton();
+        searchHosted = new javax.swing.JButton();
+        searchReservation = new javax.swing.JButton();
+        searchHistorialBedroom = new javax.swing.JButton();
+        checkIn = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(9, 35, 39));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 169, 165));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Booking system");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 30));
+
+        checkOut.setBackground(new java.awt.Color(144, 194, 231));
+        checkOut.setForeground(new java.awt.Color(11, 83, 81));
+        checkOut.setText("ADMIN: Check-Out");
+        checkOut.setFocusPainted(false);
+        checkOut.setFocusable(false);
+        checkOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkOutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(checkOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 280, 30));
+
+        searchHosted.setBackground(new java.awt.Color(144, 194, 231));
+        searchHosted.setForeground(new java.awt.Color(11, 83, 81));
+        searchHosted.setText("CLIENTES: Ver clientes hopedados");
+        searchHosted.setFocusPainted(false);
+        searchHosted.setFocusable(false);
+        searchHosted.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchHostedActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchHosted, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 280, 30));
+
+        searchReservation.setBackground(new java.awt.Color(144, 194, 231));
+        searchReservation.setForeground(new java.awt.Color(11, 83, 81));
+        searchReservation.setText("ADMIN: Buscar reservación");
+        searchReservation.setFocusPainted(false);
+        searchReservation.setFocusable(false);
+        searchReservation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchReservationActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 280, 30));
+
+        searchHistorialBedroom.setBackground(new java.awt.Color(144, 194, 231));
+        searchHistorialBedroom.setForeground(new java.awt.Color(11, 83, 81));
+        searchHistorialBedroom.setText("ADMIN: Ver historial de una habitación");
+        searchHistorialBedroom.setFocusPainted(false);
+        searchHistorialBedroom.setFocusable(false);
+        searchHistorialBedroom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchHistorialBedroomActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchHistorialBedroom, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 280, 30));
+
+        checkIn.setBackground(new java.awt.Color(144, 194, 231));
+        checkIn.setForeground(new java.awt.Color(11, 83, 81));
+        checkIn.setText("ADMIN: Check-In");
+        checkIn.setFocusPainted(false);
+        checkIn.setFocusable(false);
+        checkIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkInActionPerformed(evt);
+            }
+        });
+        jPanel1.add(checkIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 280, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Events">   
+    private void searchHostedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHostedActionPerformed
+        app.searchHosted();
+    }//GEN-LAST:event_searchHostedActionPerformed
+
+    private void searchReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReservationActionPerformed
+        app.searchReservation();
+    }//GEN-LAST:event_searchReservationActionPerformed
+
+    private void searchHistorialBedroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHistorialBedroomActionPerformed
+        app.searchBedroomHistorial();
+    }//GEN-LAST:event_searchHistorialBedroomActionPerformed
+
+    private void checkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInActionPerformed
+        app.checkIn();
+    }//GEN-LAST:event_checkInActionPerformed
+
+    private void checkOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutActionPerformed
+        app.checkOut();
+    }//GEN-LAST:event_checkOutActionPerformed
+    // </editor-fold> 
+    
     // <editor-fold defaultstate="collapsed" desc="Main function">
     /**
      * @param args the command line arguments
@@ -82,13 +179,20 @@ public class MainGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new MainGUI(t).setVisible(true);
+            new MainGUI(t, app).setVisible(true);
         });
     }
     // </editor-fold>   
 
     // <editor-fold defaultstate="collapsed" desc="Variable declaration">
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton checkIn;
+    private javax.swing.JButton checkOut;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton searchHistorialBedroom;
+    private javax.swing.JButton searchHosted;
+    private javax.swing.JButton searchReservation;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }
