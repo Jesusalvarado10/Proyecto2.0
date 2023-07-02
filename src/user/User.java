@@ -83,6 +83,7 @@ public class User {
         this.gender = gener;
         this.email = email;
         this.phone = phone;
+        
     }
     // </editor-fold> 
 

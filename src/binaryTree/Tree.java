@@ -52,6 +52,8 @@ public class Tree {
         } else {
             User u = (User) aux.getDato();
             User p = (User) pRoot.getDato();
+            System.out.println(u.getDni());
+            System.out.println(p.getDni());
             if (u.getDni() < p.getDni()) {
                 if (pRoot.getLeft() == null) {
                     pRoot.setLeft(aux);

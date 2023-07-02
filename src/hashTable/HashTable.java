@@ -83,8 +83,11 @@ public class HashTable<T> {
      */
     public void insert(T value) {
         User u = (User) value;
+        u.show();
         int index = hashFunction(u.getName(), u.getLast_name());
+        System.out.println("Indice" + index);
         LinkedList<User> list = table[index];
+        System.out.println(list.size());
         list.addLast((User) u);
     }
     // </editor-fold> 
@@ -97,6 +100,7 @@ public class HashTable<T> {
      */
     public void delete(String key, String key2) {
         int index = hashFunction(key, key2);
+        System.out.println(index);
         table[index].deleteUser(key, key2);
     }
     // </editor-fold> 
@@ -142,7 +146,8 @@ public class HashTable<T> {
      */
     private int hashFunction(String key, String key2) {
         int value = 0;
-
+        key = key.toLowerCase();
+        key2 = key2.toLowerCase();
         for (int i = 0; i < key.length(); i++) {
             char caracter = key.charAt(i);
             value += (int) caracter;

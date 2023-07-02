@@ -239,6 +239,7 @@ public class LinkedList<T> {
                     if (r == d) {
                         System.out.println(" True");
                         pivot.setNext(pivot.getNext().getNext());
+                        return;
                     }
                     pivot = pivot.getNext();
                 }
@@ -250,19 +251,25 @@ public class LinkedList<T> {
     }
 
     public void deleteUser(String name, String last_name) {
-
+        name = name.toLowerCase();
+        last_name = last_name.toLowerCase();
         if (!isEmpty()) {
 
             Node pivot = getHead();
 
             User r = (User) pivot.getDato();
-            if (r.getName() == name && r.getLast_name() == last_name) {
+            r.show();
+            System.out.println(name + "      " + last_name);
+            if (r.getName().toLowerCase().equals(name) && r.getLast_name().toLowerCase().equals(last_name)) {
+                System.out.println("ENTRO");
                 setHead(null);
             } else {
                 while (pivot.getNext() != null) {
                     r = (User) pivot.getNext().getDato();
-                    if (r.getName() == name && r.getLast_name() == last_name) {
+                    r.show();
+                    if (r.getName().toLowerCase().equals(name) && r.getLast_name().toLowerCase().equals(last_name)) {
                         pivot.setNext(pivot.getNext().getNext());
+                        return;
                     }
                     pivot = pivot.getNext();
                 }
@@ -338,10 +345,15 @@ public class LinkedList<T> {
      */
     public T getDato(String data, String data2) {
         // Es para obtener el valor del nodo que buscamos, despues de usar el search, igualmente se usa parametos especificos para el tipo de dato.
+        data=data.toLowerCase();
+        data2=data2.toLowerCase();
         Node aux = head;
         while (aux != null) {
             User u = (User) aux.getDato();
-            if (u.getName().equals(data) && u.getLast_name().equals(data2)) {
+            u.show();
+            System.out.println(data);
+            System.out.println(data2);
+            if (u.getName().toLowerCase().equals(data) && u.getLast_name().toLowerCase().equals(data2)) {
                 return (T) aux.getDato();
             }
 
