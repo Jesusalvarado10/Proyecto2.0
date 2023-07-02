@@ -60,7 +60,15 @@ public class Errors {
         String msg = "ERROR: El número que ha introducido es inválido o no existe la habitación!!";
         message(msg);
     }
-
+    
+    /**
+     * 
+     */
+    public static void noAvaliableBedrooms() {
+        String msg = "ERROR: No hay habitaciones disponibles. Su reserva va a quedar a la espera!";
+        message(msg);
+    }
+    
     /**
      *
      * @param msg

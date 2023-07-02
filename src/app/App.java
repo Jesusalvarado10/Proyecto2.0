@@ -116,49 +116,54 @@ public class App {
      * @param dni
      */
     public void checkIn() {
-        // NOTA: Para hacer el checkIn necesitamos: 
-        // =====================================================================
-        int dni = Integer.parseInt(JOptionPane.showInputDialog("Cedula").replace(" ", ""));
-        User user_aux;
-        int counter;
-        LinkedList d = reserv.copyList();
-        // =====================================================================
-        // Buscar según el DNI, la reservación
-        user_aux = null;
-        counter = 0;
-        Reservation booking = (Reservation) reserv.seachBina(dni, d); // Se copia una lista porque despues de hacer la busqueda asi la lista se rompe
-        if (booking == null) {
-            System.out.println("[!] ERROR No tiene reserva, por lo tanto NO puede hacer Check-In");
-            return;
-        }
+        try {
+            // NOTA: Para hacer el checkIn necesitamos: 
+            // =================================================================
+            int dni = Utils.requestDNI();
+            User user_aux;
+            int counter;
+            LinkedList d = reserv.copyList();
+            // =================================================================
+            // Buscar según el DNI, la reservación
+            user_aux = null;
+            counter = 0;
+            Reservation booking = (Reservation) reserv.seachBina(dni, d);
 
-        // =====================================================================
-        // Buscar habitación con la reservación, verificar si está disponible la habitación
-        for (Bedroom aux : habs) {
-            counter++;
+            if (booking != null) {
+                // =============================================================
+                // Buscar habitación con la reservación, verificar si está disponible la habitación
+                for (Bedroom aux : habs) {
+                    counter++;
 
-            // Condición: Si no está ocupado
-            if (!aux.isOccupied()) {
-                System.out.println("[I] NO ESTÁ OCUPADA!!! ");
+                    // Condición: Si no está ocupado
+                    if (!aux.isOccupied()) {
+                        System.out.println("[I] NO ESTÁ OCUPADA!!! ");
 
-                // Condición: Si es el mismo tipo que la reservada
-                if (aux.getType().equals(booking.getType())) {
-                    reserv.deleteReserv(booking); //Se elimina el valor de las reservas ya que no puede permanecer ahi 
-                    user_aux = booking.getUser();
+                        // Condición: Si es el mismo tipo que la reservada
+                        if (aux.getType().equals(booking.getType())) {
+                            reserv.deleteReserv(booking); //Se elimina el valor de las reservas ya que no puede permanecer ahi 
+                            user_aux = booking.getUser();
 
-                    aux.setOccupied(true);
-                    user_aux.setNum(counter);
-                    break;
+                            aux.setOccupied(true);
+                            user_aux.setNum(counter);
+                            break;
+                        }
+                    }
                 }
-            }
-        }
-        // =====================================================================
-        if (user_aux != null) {
-            status.insert(user_aux);
-            System.out.println("[+] Su Check-In ha sido completado con éxito");
-        } else {
-            System.out.println("[!] No hay habitaciones disponibles "); //Si tiene reserva lo que sucede es que no hay habitaciones
+                // =============================================================
+                if (user_aux != null) {
+                    status.insert(user_aux);
+                    Utils.info("Su Check-In ha sido completado con éxito");
+                } else {
+                    Errors.noAvaliableBedrooms();
+                }
 
+            } else {
+                Errors.reservationNotFounded();
+            }
+
+        } catch (Exception e) {
+            Errors.invalidInput();
         }
     }
 

@@ -61,11 +61,11 @@ public class Utils {
         // =====================================================================
         return bedroom;
     }
-    
+
     /**
-     * 
+     *
      */
-    public static void info(String msg){
+    public static void info(String msg) {
         JOptionPane.showMessageDialog(null, msg);
     }
 }
