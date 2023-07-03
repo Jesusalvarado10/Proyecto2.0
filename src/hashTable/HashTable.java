@@ -9,26 +9,26 @@ import linkedList.LinkedList;
 import user.User;
 
 /**
+ * HashTable implementation using an array of LinkedLists.
  *
- * @author Daniel
- * @param <T>
+ * @param <T> The type of elements to be stored in the HashTable.
  */
 public class HashTable<T> {
 
     /**
-     *
+     * Array of LinkedLists to store the elements.
      */
     LinkedList<User>[] table;
     /**
-     *
+     * Size of the HashTable.
      */
     int size;
 
     // <editor-fold defaultstate="collapsed" desc="Constructor">   
     /**
-     * Construye la HashTable según el tamaño pasado por parámetro
+     * Constructs a HashTable with the specified size.
      *
-     * @param n Tamaño del HastTable: (n) es...
+     * @param n The size of the HashTable.
      */
     public HashTable(int n) {
         size = n;
@@ -42,16 +42,18 @@ public class HashTable<T> {
 
     // <editor-fold defaultstate="collapsed" desc="Table">  
     /**
+     * Returns the array of LinkedLists in the HashTable.
      *
-     * @return
+     * @return The array of LinkedLists.
      */
     public LinkedList[] getTable() {
         return table;
     }
 
     /**
+     * Sets the array of LinkedLists in the HashTable.
      *
-     * @param table
+     * @param table The array of LinkedLists to set.
      */
     public void setTable(LinkedList[] table) {
         this.table = table;
@@ -60,16 +62,18 @@ public class HashTable<T> {
 
     // <editor-fold defaultstate="collapsed" desc="Size"> 
     /**
+     * Returns the size of the HashTable.
      *
-     * @return
+     * @return The size of the HashTable.
      */
     public int getSize() {
         return size;
     }
 
     /**
+     * Sets the size of the HashTable.
      *
-     * @param size
+     * @param size The size of the HashTable.
      */
     public void setSize(int size) {
         this.size = size;
@@ -78,8 +82,9 @@ public class HashTable<T> {
 
     // <editor-fold defaultstate="collapsed" desc="Insert">   
     /**
+     * Inserts a value into the HashTable.
      *
-     * @param value
+     * @param value The value to insert.
      */
     public void insert(T value) {
         User u = (User) value;
@@ -91,9 +96,10 @@ public class HashTable<T> {
 
     // <editor-fold defaultstate="collapsed" desc="Delete">   
     /**
+     * Deletes an element from the HashTable based on the specified keys.
      *
-     * @param key
-     * @param key2
+     * @param key The key to search for (name of the user).
+     * @param key2 The second key to search for (last name of the user).
      */
     public void delete(String key, String key2) {
         int index = hashFunction(key, key2);
@@ -103,10 +109,11 @@ public class HashTable<T> {
 
     // <editor-fold defaultstate="collapsed" desc="Search">   
     /**
+     * Searches for an element in the HashTable based on the specified keys.
      *
-     * @param key
-     * @param key2
-     * @return
+     * @param key The key to search for (name of the user).
+     * @param key2 The second key to search for (last name of the user).
+     * @return The User object if found, or null if not found.
      */
     public User search(String key, String key2) {
         int index = hashFunction(key, key2);
@@ -121,7 +128,7 @@ public class HashTable<T> {
 
     // <editor-fold defaultstate="collapsed" desc="Show">   
     /**
-     *
+     * Prints the elements of the HashTable.
      */
     public void show() {
         int n = 0;
@@ -137,7 +144,11 @@ public class HashTable<T> {
 
     // <editor-fold defaultstate="collapsed" desc="Hash function">  
     /**
+     * Hash function to calculate the index based on the keys.
      *
+     * @param key The key (name of the user).
+     * @param key2 The second key (last name of the user).
+     * @return The calculated index.
      */
     private int hashFunction(String key, String key2) {
         int value = 0;

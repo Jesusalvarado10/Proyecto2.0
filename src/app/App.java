@@ -5,7 +5,6 @@
  */
 package app;
 
-import javax.swing.JOptionPane;
 import bedroom.Bedroom;
 import binaryTree.Node;
 import excelManager.ExcelManager;
@@ -22,41 +21,56 @@ import user.User;
 import utils.Errors;
 import utils.Utils;
 
-// <editor-fold defaultstate="collapsed" desc="============">   
-// </editor-fold> 
 /**
+ * The App class represents an application for managing bedrooms and
+ * reservations. It provides functionality for CRUD operations on a database and
+ * uses an ExcelManager for handling Excel files.
+ *
+ * The application provides various UI functions such as searching reservations,
+ * searching bedroom history, check-in, check-out, and searching hosted clients.
+ *
+ * The application also includes methods for initializing the ExcelManager,
+ * setting up the GUI, and updating the format request.
  *
  * @author Daniel
  */
 public class App {
 
     /**
-     *
+     * The title of the CRUD project.
      */
     private String title = "CRUD PROJECT V2";
+
     /**
-     *
+     * An instance of the ExcelManager class used for handling Excel files.
      */
     private ExcelManager xlsx = new ExcelManager();
+
     /**
-     *
+     * The file path to the database file. It is constructed using the system
+     * property "user.dir" and points to the "database.xlsx" file located in the
+     * "src/database" directory.
      */
     private String databasePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "database" + File.separator + "database.xlsx";
+
     /**
-     *
+     * An array of Bedroom objects representing the available bedrooms.
      */
     private Bedroom[] habs;
+
     /**
-     *
+     * A LinkedList representing a list of reservations.
      */
     private LinkedList reserv;
+
     /**
-     *
+     * A HashTable used for storing status information.
      */
     private HashTable status;
 
     /**
-     *
+     * Starts the application by initializing the ExcelManager, updating the
+     * format request, and launching the GUI.
      */
     public void start() {
         this.excel();
@@ -66,9 +80,7 @@ public class App {
 
     // <editor-fold defaultstate="collapsed" desc="UI Functions">   
     /**
-     * READY
-     *
-     * @param numDni
+     * Searches for a reservation based on the user's DNI.
      */
     public void searchReservation() {
         // NOTA: La búsqueda de reservaciones se hacen en xlsx.reservas
@@ -86,14 +98,13 @@ public class App {
                 Errors.reservationNotFounded();
             }
         } catch (Exception e) {
+            System.out.println(e);
             Errors.invalidInput();
         }
     }
 
     /**
-     * READY
-     *
-     * @param numBed
+     * Searches for the bedroom history based on the bedroom number.
      */
     public void searchBedroomHistorial() {
         try {
@@ -111,9 +122,7 @@ public class App {
     }
 
     /**
-     * READY
-     *
-     * @param dni
+     * Performs the check-in process for a reservation.
      */
     public void checkIn() {
         try {
@@ -168,9 +177,7 @@ public class App {
     }
 
     /**
-     *
-     * @param name
-     * @param lastname
+     * Performs the check-out process for a hosted client.
      */
     public void checkOut() {
         // NOTE: Para hacer Check-Out necesitamos el (nombre) y el (apellido)
@@ -222,10 +229,7 @@ public class App {
     }
 
     /**
-     * READY
-     *
-     * @param name
-     * @param lastname
+     * Searches for a hosted client based on the client's name and last name.
      */
     public void searchHosted() {
         try {
@@ -247,7 +251,7 @@ public class App {
 
     // <editor-fold defaultstate="collapsed" desc="App functions">   
     /**
-     *
+     * Initializes the ExcelManager by reading the database file.
      */
     private void excel() {
         xlsx.read(this.databasePath);
@@ -259,12 +263,15 @@ public class App {
     }
 
     /**
-     *
+     * Sets up the GUI for the application.
      */
     private void gui() {
         MainGUI gui = new MainGUI(this.title, this);
     }
 
+    /**
+     * Updates the format request for the GUI.
+     */
     private void updateFormatRequest() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

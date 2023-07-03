@@ -8,15 +8,14 @@ package utils;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Daniel
+ * Utility class with helper methods.
  */
 public class Utils {
 
     /**
-     * Ready
+     * Requests the DNI (identification number).
      *
-     * @return
+     * @return the DNI entered by the user
      */
     public static int requestDNI() {
         int dni;
@@ -27,8 +26,9 @@ public class Utils {
     }
 
     /**
+     * Requests the name.
      *
-     * @return
+     * @return the name entered by the user
      */
     public static String requestName() {
         String name;
@@ -39,8 +39,9 @@ public class Utils {
     }
 
     /**
+     * Requests the last name.
      *
-     * @return
+     * @return the last name entered by the user
      */
     public static String requestLastame() {
         String name;
@@ -51,8 +52,9 @@ public class Utils {
     }
 
     /**
+     * Requests the number of bedrooms.
      *
-     * @return
+     * @return the number of bedrooms entered by the user
      */
     public static int requestNumBedroom() {
         int bedroom;
@@ -63,7 +65,9 @@ public class Utils {
     }
 
     /**
+     * Displays an information message.
      *
+     * @param msg the message to display
      */
     public static void info(String msg) {
         JOptionPane.showMessageDialog(null, msg);

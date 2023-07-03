@@ -28,21 +28,22 @@ import user.User;
 public class ExcelManager {
 
     /**
-     *
+     * An array of Bedroom objects.
      */
     public Bedroom[] habs;
     /**
-     *
+     * A LinkedList of reservations.
      */
     public LinkedList reservas;
     /**
-     *
+     * A HashTable for storing room statuses.
      */
     public HashTable statusHabs;
 
     /**
+     * Reads an Excel file from the specified path.
      *
-     * @param path
+     * @param path the path to the Excel file
      */
     public void read(String path) {
         // ---------------------------------------------------------------------
@@ -98,7 +99,10 @@ public class ExcelManager {
     }
 
     /**
+     * Retrieves the bookings from the specified XSSFSheet.
      *
+     * @param hoja the XSSFSheet containing the bookings data
+     * @return a LinkedList of Reservation objects representing the bookings
      */
     private LinkedList getBookings(XSSFSheet hoja) {
         LinkedList ord = new LinkedList();
@@ -254,7 +258,10 @@ public class ExcelManager {
     }
 
     /**
+     * Retrieves the bedrooms from the specified XSSFSheet.
      *
+     * @param hoja the XSSFSheet containing the bedrooms data
+     * @return an array of Bedroom objects representing the bedrooms
      */
     private Bedroom[] getBedrooms(XSSFSheet hoja) {
         LinkedList ord = new LinkedList();
@@ -362,7 +369,11 @@ public class ExcelManager {
     }
 
     /**
+     * Retrieves the status of the bedrooms from the specified XSSFSheet and
+     * returns a HashTable containing the occupancy status.
      *
+     * @param hoja the XSSFSheet containing the bedrooms data
+     * @return a HashTable representing the occupancy status of the bedrooms
      */
     private HashTable getStatus(XSSFSheet hoja) {
         LinkedList ord = new LinkedList();
@@ -500,7 +511,9 @@ public class ExcelManager {
     }
 
     /**
+     * Organizes the reservation history from the specified XSSFSheet.
      *
+     * @param hoja the XSSFSheet containing the reservation history data
      */
     private void organizerHistory(XSSFSheet hoja) {
         LinkedList ord = new LinkedList();

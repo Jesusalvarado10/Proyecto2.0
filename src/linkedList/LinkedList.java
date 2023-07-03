@@ -9,15 +9,25 @@ import reservation.Reservation;
 import user.User;
 
 /**
+ * Represents a linked list data structure.
  *
- * @author Daniel
+ * @param <T> the type of elements stored in the linked list
  */
 public class LinkedList<T> {
 
+    /**
+     * The head node of the linked list.
+     */
     Node head;
+    /**
+     * The tail node of the linked list.
+     */
     Node tail;
 
     // <editor-fold defaultstate="collapsed" desc="Constructor">   
+    /**
+     * Constructs an empty LinkedList.
+     */
     public LinkedList() {
         this.head = null;
         this.tail = null;
@@ -25,30 +35,60 @@ public class LinkedList<T> {
     // </editor-fold>  
 
     // <editor-fold defaultstate="collapsed" desc="Tail">   
+    /**
+     * Returns the tail node of the linked list.
+     *
+     * @return the tail node of the linked list
+     */
     public Node getTail() {
         return tail;
     }
 
+    /**
+     * Sets the tail node of the linked list.
+     *
+     * @param tail the tail node to be set
+     */
     public void setTail(Node tail) {
         this.tail = tail;
     }
     // </editor-fold> 
 
     // <editor-fold defaultstate="collapsed" desc="Head">   
+    /**
+     * Returns the head node of the linked list.
+     *
+     * @return the head node of the linked list
+     */
     public Node getHead() {
         return head;
     }
 
+    /**
+     * Sets the head node of the linked list.
+     *
+     * @param head the head node to be set
+     */
     public void setHead(Node head) {
         this.head = head;
     }
     // </editor-fold> 
 
     // <editor-fold defaultstate="collapsed" desc="Basic functions">   
+    /**
+     * Checks if the linked list is empty.
+     *
+     * @return true if the linked list is empty, false otherwise
+     */
     public boolean isEmpty() {
         return head == null;
     }
 
+    /**
+     * Returns the size of the linked list.
+     *
+     * @return the number of elements in the linked list
+     */
     public int size() {
         Node aux = head;
         int i = 0;
@@ -61,6 +101,11 @@ public class LinkedList<T> {
     // </editor-fold> 
 
     // <editor-fold defaultstate="collapsed" desc="Advance functions">   
+    /**
+     * Rotates the elements in the linked list in a clockwise direction.
+     *
+     * @return a new LinkedList with the elements rotated
+     */
     public LinkedList rotate() {
         Node aux = head;
         LinkedList volteada = new LinkedList();
@@ -72,6 +117,10 @@ public class LinkedList<T> {
         return volteada;
     }
 
+    /**
+     * Sorts the elements in the linked list in ascending order based on the DNI
+     * of the User in each Reservation.
+     */
     public void sort() {
         Node pivot = head;
         Node siguiente;
@@ -115,6 +164,12 @@ public class LinkedList<T> {
         }
     }
 
+    /**
+     * Performs merge sort on the linked list.
+     *
+     * @param node the head node of the linked list to be sorted
+     * @return the head node of the sorted linked list
+     */
     public Node mergeSort(Node node) {
         if (node == null || node.getNext() == null) {
             return node;
@@ -128,6 +183,12 @@ public class LinkedList<T> {
         return sortedList;
     }
 
+    /**
+     * Returns the middle node of a given linked list.
+     *
+     * @param node the head node of the linked list
+     * @return the middle node of the linked list
+     */
     private Node getMiddle(Node node) {
         if (node == null) {
             return node;
@@ -141,6 +202,13 @@ public class LinkedList<T> {
         return slow;
     }
 
+    /**
+     * Merges two sorted linked lists into a single sorted linked list.
+     *
+     * @param left the head node of the first sorted linked list
+     * @param right the head node of the second sorted linked list
+     * @return the head node of the merged sorted linked list
+     */
     private Node merge(Node left, Node right) {
         Node sortedList = null;
         if (left == null) {
@@ -163,6 +231,11 @@ public class LinkedList<T> {
     // </editor-fold> 
 
     // <editor-fold defaultstate="collapsed" desc="Add">   
+    /**
+     * Adds an element to the beginning of the linked list.
+     *
+     * @param dato the element to be added
+     */
     public void addFirst(T dato) {
         Node aux = new Node(dato);
         if (isEmpty()) {
@@ -176,6 +249,11 @@ public class LinkedList<T> {
         }
     }
 
+    /**
+     * Adds an element to the end of the linked list.
+     *
+     * @param dato the element to be added
+     */
     public void addLast(T dato) {
         Node aux = new Node(dato);
         if (isEmpty()) {
@@ -190,6 +268,12 @@ public class LinkedList<T> {
 
     }
 
+    /**
+     * Adds an element at the specified index in the linked list.
+     *
+     * @param index the index at which the element should be added
+     * @param dato the element to be added
+     */
     public void addInIndex(int index, T dato) {
         Node aux = new Node(dato);
 
@@ -212,7 +296,10 @@ public class LinkedList<T> {
     }
     // </editor-fold> 
 
-    // <editor-fold defaultstate="collapsed" desc="Delete">   
+    // <editor-fold defaultstate="collapsed" desc="Delete">  
+    /**
+     * Deletes the first element from the linked list.
+     */
     public void deleteFirst() {
         if (!isEmpty()) {
             Node pivot = getHead();
@@ -223,6 +310,11 @@ public class LinkedList<T> {
         }
     }
 
+    /**
+     * Deletes a specific reservation from the linked list.
+     *
+     * @param d the reservation to be deleted
+     */
     public void deleteReserv(Reservation d) {
 
         if (!isEmpty()) {
@@ -248,6 +340,12 @@ public class LinkedList<T> {
         }
     }
 
+    /**
+     * Deletes a user with the given name and last name from the linked list.
+     *
+     * @param name the name of the user
+     * @param last_name the last name of the user
+     */
     public void deleteUser(String name, String last_name) {
         name = name.toLowerCase();
         last_name = last_name.toLowerCase();
@@ -276,6 +374,9 @@ public class LinkedList<T> {
         }
     }
 
+    /**
+     * Deletes the last element from the linked list.
+     */
     public void deleteLast() {
 
         if (!isEmpty()) {
@@ -298,6 +399,11 @@ public class LinkedList<T> {
         }
     }
 
+    /**
+     * Deletes the element at the specified index from the linked list.
+     *
+     * @param index the index of the element to be deleted
+     */
     public void deleteInIndex(int index) {
         if (!isEmpty()) {
             Node pivot = getHead();
@@ -318,6 +424,9 @@ public class LinkedList<T> {
     // </editor-fold> 
 
     // <editor-fold defaultstate="collapsed" desc="Show">   
+    /**
+     * Displays the elements of the linked list.
+     */
     public void show() {
         Node aux = head;
         while (aux != null) {
@@ -330,14 +439,12 @@ public class LinkedList<T> {
 
     // <editor-fold defaultstate="collapsed" desc="Extra functions">
     /**
-     * Busca con el (nombre) y (apellido) proporcionado el nodo en el que se
-     * ubica esta información en la lista
+     * Searches for the node containing the provided name and last name in the
+     * list.
      *
-     *
-     * @param data Nombre del usuario
-     * @param data2 Apellido del usuario
-     * @return Nodo si este existe. Null si no existe ningún nodo con esa
-     * información
+     * @param data The name of the user.
+     * @param data2 The last name of the user.
+     * @return The node if it exists, null otherwise.
      */
     public T getDato(String data, String data2) {
         // Es para obtener el valor del nodo que buscamos, despues de usar el search, igualmente se usa parametos especificos para el tipo de dato.
@@ -356,11 +463,10 @@ public class LinkedList<T> {
     }
 
     /**
-     * Función que según la posición dada, devuelve los datos almacenados en el
-     * nodo
+     * Returns the data stored in the node at the given position.
      *
-     * @param d Posición
-     * @return Nodo. Null si la posición no es válida
+     * @param d The position.
+     * @return The node. Null if the position is not valid.
      */
     public T getValuePosition(int d) {
         Node aux = head;
@@ -376,10 +482,12 @@ public class LinkedList<T> {
     }
 
     /**
-     * ?????
+     * Searches for the position of the node containing the given data in the
+     * list.
      *
-     * @param dato
-     * @return
+     * @param dato The data to search for.
+     * @return The position of the node if found, or -1 if the node doesn't
+     * exist in the list.
      */
     public int getPosicion(T dato) {
         Node aux = head;
@@ -395,12 +503,11 @@ public class LinkedList<T> {
     }
 
     /**
-     * Busca con el (nombre) y el (apellido) de la persona, el nodo
+     * Searches for the node with the given name and last name.
      *
-     *
-     * @param data Nombre de la persona
-     * @param data2 Apellido de la persona
-     * @return True si existe el nodo. False si no existe
+     * @param data The name of the person.
+     * @param data2 The last name of the person.
+     * @return True if the node exists, false otherwise.
      */
     public boolean search(T data, T data2) {
         Node aux = head;
@@ -415,8 +522,9 @@ public class LinkedList<T> {
     }
 
     /**
+     * Creates a copy of the linked list.
      *
-     * @return
+     * @return A new LinkedList object that is a copy of the original list.
      */
     public LinkedList copyList() {
         LinkedList n = new LinkedList();
@@ -430,6 +538,12 @@ public class LinkedList<T> {
 
     }
 
+    /**
+     * Returns the node before the given node.
+     *
+     * @param t The node.
+     * @return The node before the given node.
+     */
     public Node before(Node t) {
         Node aux = head;
         while (aux.getNext() != t) {
@@ -439,11 +553,11 @@ public class LinkedList<T> {
     }
 
     /**
+     * Searches for a reservation using binary search algorithm.
      *
-     * @param dni
-     * @param aux
-     * @param counter
-     * @return
+     * @param dni The DNI (identification number) to search for.
+     * @param aux The linked list to search within.
+     * @return The reservation if found, null otherwise.
      */
     public Reservation seachBina(T dni, LinkedList aux) {
         Node middle = getMiddle(aux.getHead());
@@ -469,10 +583,10 @@ public class LinkedList<T> {
     }
 
     /**
-     * ?????
+     * Searches for a node containing the given data in the list.
      *
-     * @param data
-     * @return
+     * @param data The data to search for.
+     * @return The node if found, or null if the node doesn't exist in the list.
      */
     public T search2(T data) {
         Node aux = head;

@@ -9,36 +9,42 @@ import javax.swing.JFrame;
 import user.User;
 
 /**
- *
- * @author Daniel
+ * A GUI class for displaying client information.
  */
 public class ShowHostedGUI extends javax.swing.JFrame {
 
+    /**
+     * The client object to display information for.
+     */
     static User client;
+    /**
+     * The title of the GUI window.
+     */
     static String title = "Showing information";
-    
+
     // <editor-fold defaultstate="collapsed" desc="Constructor">                 
     /**
      * Creates new form ShowClientGUI
+     *
      * @param aux
      */
     public ShowHostedGUI(User aux) {
         // Ignore
         initComponents();
-        
+
         // Windows config
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle(title);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
+
         // Utils
         client = aux;
         this.update();
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -158,7 +164,11 @@ public class ShowHostedGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void update(){
+    // <editor-fold defaultstate="collapsed" desc="Functions">     
+    /**
+     * Updates the displayed information with the current client data.
+     */
+    private void update() {
         name.setText(client.getName());
         lastname.setText(client.getLast_name());
         email.setText(client.getEmail());
@@ -166,6 +176,7 @@ public class ShowHostedGUI extends javax.swing.JFrame {
         ride.setText(client.getRide());
         num.setText(String.valueOf(client.getNum()));
     }
+    // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Main function">        
     /**
@@ -193,7 +204,6 @@ public class ShowHostedGUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ShowHostedGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

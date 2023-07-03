@@ -8,20 +8,27 @@ package gui;
 import app.App;
 
 /**
+ * The MainGUI class represents the main graphical user interface of the
+ * application.
  *
- * @author Daniel
  */
 public class MainGUI extends javax.swing.JFrame {
 
+    /**
+     * Static variable to store a title of the program
+     */
     static String t;
+    /**
+     * Static variable to store an instance of the App class.
+     */
     static App app;
-    
-    
+
     // <editor-fold defaultstate="collapsed" desc="Constructor">   
     /**
      * Creates new form MainGUI
      *
-     * @param title
+     * @param title Title of the program
+     * @param appParam App instance to work with harmony
      */
     public MainGUI(String title, App appParam) {
         // Ignore
@@ -127,28 +134,53 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // <editor-fold defaultstate="collapsed" desc="Events">   
+    // <editor-fold defaultstate="collapsed" desc="Events">
+    /**
+     * Event handler for the "Search Hosted" action.
+     *
+     * @param evt The action event
+     */
     private void searchHostedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHostedActionPerformed
         app.searchHosted();
     }//GEN-LAST:event_searchHostedActionPerformed
 
+    /**
+     * Event handler for the "Search Reservation" action.
+     *
+     * @param evt The action event
+     */
     private void searchReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReservationActionPerformed
         app.searchReservation();
     }//GEN-LAST:event_searchReservationActionPerformed
 
+    /**
+     * Event handler for the "Search Bedroom History" action.
+     *
+     * @param evt The action event
+     */
     private void searchHistorialBedroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHistorialBedroomActionPerformed
         app.searchBedroomHistorial();
     }//GEN-LAST:event_searchHistorialBedroomActionPerformed
 
+    /**
+     * Event handler for the "Check-In" action.
+     *
+     * @param evt The action event
+     */
     private void checkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInActionPerformed
         app.checkIn();
     }//GEN-LAST:event_checkInActionPerformed
 
+    /**
+     * Event handler for the "Check-Out" action.
+     *
+     * @param evt The action event
+     */
     private void checkOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutActionPerformed
         app.checkOut();
     }//GEN-LAST:event_checkOutActionPerformed
     // </editor-fold> 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Main function">
     /**
      * @param args the command line arguments
