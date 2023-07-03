@@ -215,8 +215,23 @@ public class App {
 
                     } catch (Exception e) {
                         Errors.invalidInput();
-                    }
 
+                    }
+                } else {
+                    // Elimina...
+                    status.delete(name, lastname);
+
+                    // Elimina...
+                    int index = user_aux.getNum() - 1;
+                    habs[index].setOccupied(false);
+
+                    // input dni y si no esta en el arbol  (con alguno de los recorridos) a;adirlo porque los usuarios que provienen de las habitaciones (Estados) no tiene cedula 
+                    Node aux = new Node(user_aux);
+                    habs[index].getTree().insert(habs[index].getTree().getpRoot(), aux);
+                    habs[index].getTree().inOrder(habs[index].getTree().getpRoot());
+
+                    // Information
+                    Utils.info("Su Check-Out ha sido realizado correctamente!");
                 }
 
             } else {
