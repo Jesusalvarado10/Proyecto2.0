@@ -6,47 +6,56 @@
 package binaryTree;
 
 import gui.ShowHistorialGUI;
-import gui.ShowHostedGUI;
 import user.User;
 
 /**
+ * The Tree class represents a binary tree. It provides methods for inserting
+ * nodes, searching for nodes, and performing various tree traversal operations.
+ *
+ * The class contains a reference to the root node of the tree and supports
+ * operations such as inserting a new node, searching for a node with a specific
+ * value, and performing in-order, pre-order, and post-order traversals of the
+ * tree.
  *
  * @author Daniel
  */
 public class Tree {
 
     /**
-     *
+     * The root node of the binary tree.
      */
     Node pRoot;
 
     /**
-     *
+     * Constructs an empty binary tree.
      */
     public Tree() {
         this.pRoot = null;
     }
 
     /**
+     * Returns the root node of the binary tree.
      *
-     * @return
+     * @return the root node of the binary tree
      */
     public Node getpRoot() {
         return pRoot;
     }
 
     /**
+     * Sets the root node of the binary tree.
      *
-     * @param pRoot
+     * @param pRoot the root node of the binary tree to set
      */
     public void setpRoot(Node pRoot) {
         this.pRoot = pRoot;
     }
 
     /**
+     * Inserts a new node into the binary tree.
      *
-     * @param pRoot
-     * @param aux
+     * @param pRoot the root node of the binary tree
+     * @param aux the node to be inserted
      */
     public void insert(Node pRoot, Node aux) {
         if (this.pRoot == null) {
@@ -74,10 +83,11 @@ public class Tree {
     }
 
     /**
+     * Searches for a node with the specified data in the binary tree.
      *
-     * @param aux
-     * @param data
-     * @return
+     * @param aux the current node being checked
+     * @param data the data to search for
+     * @return the node with the specified data, or null if not found
      */
     public Node search(Node aux, int data) {
         if (aux == null) {
@@ -95,8 +105,9 @@ public class Tree {
     }
 
     /**
+     * Performs an in-order traversal of the binary tree.
      *
-     * @param root
+     * @param root the current root node
      */
     public void inOrder(Node root) {
         if (root != null) {
@@ -107,8 +118,36 @@ public class Tree {
     }
 
     /**
+     * Performs a pre-order traversal of the binary tree.
      *
-     * @param root
+     * @param root the current root node
+     */
+    public void preOrder(Node root) {
+        if (root != null) {
+            ;
+            preOrder(root.getLeft());
+            preOrder(root.getRight());
+        }
+    }
+
+    /**
+     * Performs a post-order traversal of the binary tree.
+     *
+     * @param root the current root node
+     */
+    public void postOrder(Node root) {
+        if (root != null) {
+            postOrder(root.getLeft());
+            postOrder(root.getRight());
+            System.out.print(root.getDato() + ",");
+        }
+    }
+
+    // =========================================================================
+    /**
+     * Shows the historical records of the binary tree.
+     *
+     * @param root the current root node
      */
     public void showHistorial(Node root) {
         if (root != null) {
@@ -121,28 +160,5 @@ public class Tree {
             showHistorial(root.getRight());
         }
     }
-
-    /**
-     *
-     * @param root
-     */
-    public void preOrder(Node root) {
-        if (root != null) {
-            ;
-            preOrder(root.getLeft());
-            preOrder(root.getRight());
-        }
-    }
-
-    /**
-     *
-     * @param root
-     */
-    public void postOrder(Node root) {
-        if (root != null) {
-            postOrder(root.getLeft());
-            postOrder(root.getRight());
-            System.out.print(root.getDato() + ",");
-        }
-    }
+    // =========================================================================
 }
