@@ -520,6 +520,18 @@ public class LinkedList<T> {
         }
         return false;
     }
+    public boolean searchHash(int dni){
+    Node aux = head;
+        while (aux != null) {
+            User u = (User) aux.getDato();
+            if (u.getDni()==dni) {
+                return true;
+            }
+            aux = aux.getNext();
+        }
+        return false;
+    }
+    }
 
     /**
      * Creates a copy of the linked list.

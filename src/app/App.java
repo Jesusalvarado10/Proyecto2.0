@@ -180,7 +180,10 @@ public class App {
      * Performs the check-out process for a hosted client.
      */
     public void checkOut() {
-        // NOTE: Para hacer Check-Out necesitamos el (nombre) y el (apellido)
+        
+//        NOTE: Para hacer Check-Out necesitamos el (nombre) y el (apellido)
+        LinkedList d = reserv.copyList();
+        boolean f = true;
         // =====================================================================
         try {
             String name = Utils.requestName();
@@ -195,8 +198,24 @@ public class App {
             if (user_aux != null) {
                 if (user_aux.getDni() == 0) {
                     try {
-                        int dni = Utils.requestDNI();
-                        user_aux.setDni(dni);
+                        while (f) {
+                            f = false;
+                            int dni = Utils.requestDNI();
+                            if (reserv.seachBina(dni, d) != null) {
+                                f = true;
+                            }
+                            if (status.search2(dni)) {
+//                                System.out.println("    Entro");
+                                f = true;
+                            }
+                            if (!Utils.searchArray(habs, dni)) {
+                                f = true;
+                            }
+                            if (f == false) {
+                                user_aux.setDni(dni);
+                            }
+
+                        }
 
                         // Elimina...
                         status.delete(name, lastname);

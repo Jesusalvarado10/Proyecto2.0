@@ -125,6 +125,17 @@ public class HashTable<T> {
         }
     }
     // </editor-fold> 
+    
+    public boolean search2(int dni){
+    for (LinkedList x : table) {
+            if (x.searchHash(dni)){
+                return true;
+               
+            }
+        }
+    return false;
+    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Show">   
     /**
