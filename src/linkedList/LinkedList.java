@@ -531,7 +531,7 @@ public class LinkedList<T> {
         }
         return false;
     }
-    }
+    
 
     /**
      * Creates a copy of the linked list.

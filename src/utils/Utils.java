@@ -5,6 +5,7 @@
  */
 package utils;
 
+import bedroom.Bedroom;
 import javax.swing.JOptionPane;
 
 /**
@@ -71,5 +72,15 @@ public class Utils {
      */
     public static void info(String msg) {
         JOptionPane.showMessageDialog(null, msg);
+    }
+     public static boolean searchArray(Bedroom[] habs,int dni) {
+        for (Bedroom aux : habs) {
+            if (aux.getTree().search(aux.getTree().getpRoot(), dni)!=null){
+              
+            return false;
+            }
+        
+        }
+        return true ;
     }
 }
